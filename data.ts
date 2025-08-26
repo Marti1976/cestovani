@@ -30,7 +30,7 @@ export const tripData: TripData = {
           webLink: 'https://www.vvb.sk/vodnu-elektraren-gabcikovo-uviedli-do-prevadzky-pred-20-rokmi/',
         },
         {
-          title: 'Slovakia Ring + Military Museum',
+          title: 'Slovakia Ring a Military Museum',
           rating: '★ 4,6',
           tags: ['Orechová Potôň, cca 55 km před KN'],
           description: 'Moderní motoristický okruh, v jehož areálu se nachází vojenské muzeum s tanky, letadly a obrněnými vozidly. Skvělá kombinace motorsportu a vojenské techniky pro otce a syny.',
@@ -45,7 +45,7 @@ export const tripData: TripData = {
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Malkia+Park',
         },
         {
-          title: 'Vodní dílo Čunovo + Danubiana',
+          title: 'Vodní dílo Čunovo a Danubiana',
           rating: '★ 4,8',
           tags: ['u Bratislavy, na trase'],
           description: 'Technické vodní dílo na Dunaji se sportovními kanály pro vodní slalom a rafting. Modernа budova galerie Danubiana na poloostrově je architektonicky a technicky unikátní. Možnost prohlídky konstrukce a pozorování vodních technologií.',
@@ -80,13 +80,13 @@ export const tripData: TripData = {
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Historický+mlýn+Kolárovo',
         },
         {
-          title: 'Město Senec (orientační bod)',
+          title: 'Město Senec, orientační bod',
           tags: ['na trase, větší město'],
           description: 'Zastávka ve městě pro občerstvení a odpočinek během dlouhé cesty.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Senec',
         },
         {
-          title: 'Město Trnava (orientační bod)',
+          title: 'Město Trnava, orientační bod',
           tags: ['na trase, historické město'],
           description: 'Starobylé město s technickými prvky ve starých opevněních a městské věži.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Trnava',
@@ -126,14 +126,14 @@ export const tripData: TripData = {
           webLink: 'http://erod.hu/a-csillagerod/',
         },
         {
-          title: 'Expozice římských artefaktů (Brigetio)',
+          title: 'Expozice římských artefaktů, Brigetio',
           rating: '★ 4,3',
           tags: ['v Komárně (v baště pevnosti)'],
           description: 'Expozice kamenných soch a artefaktů z římské doby, kdy zde stál tábor Brigetio. Většina exponátů pochází z 2. až 4. století. Skvělý pohled do antické vojenské historie.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Expozice+římských+artefaktů+Komárno',
         },
         {
-          title: 'Courtyard of Europe (Nádvoří Evropy)',
+          title: 'Courtyard of Europe, Nádvoří Evropy',
           rating: '★ 4,4 (3703)',
           tags: ['v Komárně'],
           description: 'Unikátní náměstí s architekturou reprezentující 45 evropských zemí a regionů. I když má umělecký nádech, je to zajímavý architektonický projekt.',
@@ -162,7 +162,7 @@ export const tripData: TripData = {
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Římský+kastel+Iža',
         },
         {
-          title: 'Cold War Exhibition & Vodárenské muzeum',
+          title: 'Cold War Exhibition a Vodárenské muzeum',
           rating: '★ 5,0 (9)',
           tags: ['centrum Komárna'],
           description: 'Výstava studené války kombinovaná s technickým muzeum vodárenství. Unikátní spojení vojenské historie a techniky, vojenské a technické exponáty z doby železné opony.',
@@ -280,7 +280,7 @@ export const tripData: TripData = {
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Hrad+Hrušov',
         },
         {
-          title: 'Trnava - opevnění',
+          title: 'Trnava, opevnění',
           rating: '★ 4,3',
           tags: ['na trase'],
           description: 'Jeden z nejlépe dochovaných fortifikačních systémů na Slovensku. Projděte se podél zachovalých hradeb a bašt "malého Říma". Historické centrum s množstvím kostelů a zachovalým městským opevněním.',
@@ -357,14 +357,14 @@ export const tripData: TripData = {
           webLink: 'http://www.hraduhrovec.sk',
         },
         {
-          title: 'Ducové - velikomoravské hradiště',
+          title: 'Ducové, velikomoravské hradiště',
           rating: '★ 4,2',
           tags: ['8 km'],
           description: 'Významné velkomoravské hradiště na ostrohu nad Váhem. Archeologická lokalita s částečně zrekonstruovanými základy dvorce a kostela z 9. století.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Ducové+hradiště',
         },
         {
-          title: 'Lúka - hradiště',
+          title: 'Lúka, hradiště',
           rating: '★ 4,0',
           tags: ['cca 15 km'],
           description: 'Archeologické naleziště velkomoravského hradiště s pozůstatky opevnění a kostela z 9. století. Nachází se u obce Lúka. Významné slovanské hradiště s pozůstatky opevnění a sakrálních staveb.',
@@ -477,7 +477,7 @@ export const tripData: TripData = {
           webLink: 'http://hradcervenykamen.sk',
         },
         {
-          title: 'Trnava - historické centrum',
+          title: 'Trnava, historické centrum',
           rating: '★ 4,3',
           tags: ['na trase'],
           description: 'Historické centrum Trnavy, nazývané "malý Řím", s množstvím kostelů a zachovalým městským opevněním. Stačí se projít centrem a obdivovat středověké opevnění.',
@@ -543,7 +543,7 @@ export const tripData: TripData = {
           webLink: 'http://www.bunker.bs8.sk',
         },
         {
-          title: 'Most SNP (UFO Tower)',
+          title: 'Most SNP, UFO Tower',
           rating: '★ 4,5 (10159)',
           tags: ['Most SNP'],
           description: 'Technicky unikátní most bez pilířů v řece. Možnost vyjet výtahem do restaurace ve tvaru UFO, odkud je nejlepší výhled na hrad a staré město. Jedinečné inženýrské dílo.',
@@ -628,7 +628,7 @@ export const tripData: TripData = {
           webLink: 'https://www.facebook.com/bunkerBS10',
         },
         {
-          title: 'Observation Deck – Americké námestie',
+          title: 'Observation Deck, Americké námestie',
           rating: '★ 4,6 (990)',
           tags: ['Nové Mesto'],
           description: 'Moderní vyhlídková platforma s výhledem na město a technickými detaily konstrukce. Panoramatické výhledy na Bratislavu.',
