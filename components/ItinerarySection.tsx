@@ -13,14 +13,27 @@ interface ItinerarySectionProps {
 
 const ItinerarySection: React.FC<ItinerarySectionProps> = ({ data, visitedPlaces, onToggleVisited }) => {
   
-  const handleShowDayOnMap = () => {
-    if (data.places.length === 0) return;
-    // Encode each place title and join them with a pipe '|' for a multi-point search
-    const locationsQuery = data.places.map(p => encodeURIComponent(p.title)).join('|');
-    // Use the Google Maps search URL to display multiple points without navigation
+  const CHUNK_SIZE = 10; // Bezpečná velikost pro URL, aby nedošlo k jejímu oříznutí
+
+  // Funkce pro rozdělení pole míst na menší části
+  const getPlaceChunks = (places: Place[]): Place[][] => {
+    const chunks: Place[][] = [];
+    if (!places) return chunks;
+    for (let i = 0; i < places.length; i += CHUNK_SIZE) {
+      chunks.push(places.slice(i, i + CHUNK_SIZE));
+    }
+    return chunks;
+  };
+
+  const placeChunks = getPlaceChunks(data.places);
+
+  const handleShowChunkOnMap = (placesInChunk: Place[]) => {
+    if (placesInChunk.length === 0) return;
+    const locationsQuery = placesInChunk.map(p => encodeURIComponent(p.title)).join('|');
     const mapUrl = `https://www.google.com/maps/search/?api=1&query=${locationsQuery}`;
     window.open(mapUrl, '_blank');
   };
+
 
   return (
     <section className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg p-6 md:p-8 mb-10">
@@ -28,15 +41,18 @@ const ItinerarySection: React.FC<ItinerarySectionProps> = ({ data, visitedPlaces
         <h2 className="text-2xl md:text-3xl font-bold text-blue-700 dark:text-blue-400">
           {data.sectionTitle}
         </h2>
-        {data.places.length > 0 && (
-          <button
-            onClick={handleShowDayOnMap}
-            className="flex items-center gap-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 font-semibold py-2 px-4 rounded-lg transition-colors duration-200 text-sm"
-          >
-            <IconMap />
-            Zobrazit den na mapě
-          </button>
-        )}
+        <div className="flex flex-wrap gap-2">
+           {placeChunks.map((chunk, index) => (
+            <button
+              key={index}
+              onClick={() => handleShowChunkOnMap(chunk)}
+              className="flex items-center gap-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 font-semibold py-2 px-4 rounded-lg transition-colors duration-200 text-sm"
+            >
+              <IconMap />
+              {`Zobrazit na mapě${placeChunks.length > 1 ? ` (část ${index + 1})` : ''}`}
+            </button>
+          ))}
+        </div>
       </div>
 
       {data.travelInfo && <TravelInfoCard travelInfo={data.travelInfo} />}
