@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Place } from './types';
 import { IconMapPin, IconLink, IconSparkles, IconCalendar, IconCheck, IconWaze } from './Icons';
@@ -56,7 +55,9 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place, isVisited, onToggleVisited
   const wazeLink = getWazeLink();
   
   const buttonCount = [place.mapLink, wazeLink, place.webLink].filter(Boolean).length;
-  const gridColsClass = `grid-cols-${buttonCount > 0 ? buttonCount : 1}`;
+  const buttonSizeClass = buttonCount === 3 
+    ? 'text-xs py-2 px-3 gap-1.5' // Compact for 3 buttons
+    : 'text-sm py-2 px-4 gap-2';  // Standard for 1 or 2
 
 
   return (
@@ -91,21 +92,21 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place, isVisited, onToggleVisited
           <IconSparkles />
           AI Průvodce v aplikaci
         </a>
-        <div className={`grid ${gridColsClass} gap-3`}>
+        <div className="flex gap-3">
             {place.mapLink && (
-              <a href={place.mapLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+              <a href={place.mapLink} target="_blank" rel="noopener noreferrer" className={`flex-1 flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors duration-200 ${buttonSizeClass}`}>
                 <IconMapPin />
                 Mapa
               </a>
             )}
             {wazeLink && (
-              <a href={wazeLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+              <a href={wazeLink} target="_blank" rel="noopener noreferrer" className={`flex-1 flex items-center justify-center bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors duration-200 ${buttonSizeClass}`}>
                 <IconWaze />
                 Waze
               </a>
             )}
             {place.webLink && (
-              <a href={place.webLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+              <a href={place.webLink} target="_blank" rel="noopener noreferrer" className={`flex-1 flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-200 ${buttonSizeClass}`}>
                 <IconLink />
                 Web
               </a>
