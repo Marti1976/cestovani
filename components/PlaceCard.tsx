@@ -54,6 +54,10 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place, isVisited, onToggleVisited
   };
 
   const wazeLink = getWazeLink();
+  
+  const buttonCount = [place.mapLink, wazeLink, place.webLink].filter(Boolean).length;
+  const gridColsClass = `grid-cols-${buttonCount > 0 ? buttonCount : 1}`;
+
 
   return (
     <div className={`bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-700 rounded-xl p-5 flex flex-col justify-between shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-300 ${isVisited ? 'opacity-50 grayscale' : ''}`}>
@@ -87,21 +91,21 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place, isVisited, onToggleVisited
           <IconSparkles />
           AI Průvodce v aplikaci
         </a>
-        <div className="flex gap-3">
+        <div className={`grid ${gridColsClass} gap-3`}>
             {place.mapLink && (
-              <a href={place.mapLink} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+              <a href={place.mapLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
                 <IconMapPin />
                 Mapa
               </a>
             )}
             {wazeLink && (
-              <a href={wazeLink} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+              <a href={wazeLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
                 <IconWaze />
                 Waze
               </a>
             )}
             {place.webLink && (
-              <a href={place.webLink} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+              <a href={place.webLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
                 <IconLink />
                 Web
               </a>
