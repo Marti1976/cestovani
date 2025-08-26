@@ -51,6 +51,9 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place, isVisited, onToggleVisited
     }
     return null;
   };
+  
+  const aiGuideQuery = `Pověz mi zajímavosti o: ${place.title}`;
+  const aiGuideLink = `https://www.google.com/search?q=${encodeURIComponent(aiGuideQuery)}`;
 
   const wazeLink = getWazeLink();
   
@@ -86,11 +89,13 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place, isVisited, onToggleVisited
       </div>
       <div className="mt-auto flex flex-col gap-3">
          <a
-          href={`travelaide://search?q=${encodeURIComponent(place.title)}`}
+          href={aiGuideLink}
+          target="_blank"
+          rel="noopener noreferrer"
           className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:shadow-lg hover:from-purple-600 hover:to-indigo-600 transition-all duration-200"
         >
           <IconSparkles />
-          AI Průvodce v aplikaci
+          AI Průvodce
         </a>
         <div className="flex gap-3">
             {place.mapLink && (
