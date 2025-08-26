@@ -53,7 +53,7 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place, isVisited, onToggleVisited
   };
   
   const aiGuideQuery = `Pověz mi zajímavosti o: ${place.title}`;
-  const aiGuideLink = `https://www.google.com/search?q=${encodeURIComponent(aiGuideQuery)}`;
+  const aiGuideLink = `https://gemini.google.com/app?prompt=${encodeURIComponent(aiGuideQuery)}`;
 
   const wazeLink = getWazeLink();
   
