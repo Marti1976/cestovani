@@ -28,17 +28,14 @@
             with:
               node-version: 20
           - name: Install dependencies
-            run: npm install -g esbuild
+            run: npm install
           - name: Build
             run: |
-              mkdir -p dist
-              esbuild index.tsx --bundle --outfile=dist/index.js
+              npm run build
+              # Manually copy assets that are not in a 'public' folder
               cp -r icons dist/
               cp manifest.json dist/
               cp sw.js dist/
-              cp index.html dist/
-              sed -i 's|<script type="module" src="/index.tsx"></script>|<script type="module" src="/index.js"></script>|' dist/index.html
-              sed -i '/<script type="importmap">/,/<\/script>/d' dist/index.html
           - name: Setup Pages
             uses: actions/configure-pages@v5
           - name: Upload artifact
