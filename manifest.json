@@ -1,7 +1,8 @@
 {
-  "short_name": "Cestovní Plán",
+  "short_name": "Cest.Plán",
   "name": "Cestovní Plánovač",
   "description": "Interaktivní plánovač pro vaše cesty a dobrodružství.",
+  "version": "1.00",
   "start_url": "/cestovani/",
   "display": "standalone",
   "background_color": "#f1f5f9",
