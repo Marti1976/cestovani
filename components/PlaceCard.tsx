@@ -51,10 +51,30 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place, isVisited, onToggleVisited
     }
     return null;
   };
-  
-  const aiGuideQuery = `Pověz mi zajímavosti o: ${place.title}`;
-  const aiGuideLink = `https://gemini.google.com/app?prompt=${encodeURIComponent(aiGuideQuery)}`;
 
+  const handleAiGuideClick = async () => {
+    const aiGuideQuery = `Pověz mi zajímavosti o: ${place.title}`;
+    
+    // Check if the Web Share API is available (mostly on mobile)
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `AI Průvodce: ${place.title}`,
+          text: aiGuideQuery,
+        });
+      } catch (error) {
+        console.error('Chyba při sdílení:', error);
+        // Optional: Fallback to link if sharing fails
+        const aiGuideLink = `https://gemini.google.com/app?prompt=${encodeURIComponent(aiGuideQuery)}`;
+        window.open(aiGuideLink, '_blank', 'noopener,noreferrer');
+      }
+    } else {
+      // Fallback for desktops or browsers that don't support Web Share API
+      const aiGuideLink = `https://gemini.google.com/app?prompt=${encodeURIComponent(aiGuideQuery)}`;
+      window.open(aiGuideLink, '_blank', 'noopener,noreferrer');
+    }
+  };
+  
   const wazeLink = getWazeLink();
   
   const buttonCount = [place.mapLink, wazeLink, place.webLink].filter(Boolean).length;
@@ -88,15 +108,13 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place, isVisited, onToggleVisited
         </p>
       </div>
       <div className="mt-auto flex flex-col gap-3">
-         <a
-          href={aiGuideLink}
-          target="_blank"
-          rel="noopener noreferrer"
+         <button
+          onClick={handleAiGuideClick}
           className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:shadow-lg hover:from-purple-600 hover:to-indigo-600 transition-all duration-200"
         >
           <IconSparkles />
           AI Průvodce
-        </a>
+        </button>
         <div className="flex gap-3">
             {place.mapLink && (
               <a href={place.mapLink} target="_blank" rel="noopener noreferrer" className={`flex-1 flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors duration-200 ${buttonSizeClass}`}>
@@ -133,5 +151,4 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place, isVisited, onToggleVisited
     </div>
   );
 };
-
 export default PlaceCard;
