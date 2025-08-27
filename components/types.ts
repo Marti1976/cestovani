@@ -2,7 +2,7 @@ export interface Place {
   title: string;
   rating?: string;
   tags: string[];
-  description: string;
+  description:string;
   mapLink?: string;
   webLink?: string;
 }
