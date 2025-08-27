@@ -10,7 +10,7 @@ import UsefulLinks from './components/UsefulLinks';
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('isAuthenticated') === 'true');
   
-  const APP_VERSION = tripData.version;
+  const APP_VERSION_IDENTIFIER = tripData.versionIdentifier;
 
   const [visitedPlaces, setVisitedPlaces] = useState<Set<string>>(() => {
     try {
@@ -25,7 +25,6 @@ const App: React.FC = () => {
   const [usefulLinks, setUsefulLinks] = useState<UsefulLink[]>(() => {
     try {
       const item = window.localStorage.getItem('usefulLinks');
-      // If links are in localStorage, use them; otherwise, initialize from the main data file.
       return item ? JSON.parse(item) : tripData.usefulLinks;
     } catch (error)
     {
@@ -35,30 +34,57 @@ const App: React.FC = () => {
   });
   
   useEffect(() => {
-    try {
-        const storedVersion = window.localStorage.getItem('tripVersion');
-        if (storedVersion !== APP_VERSION) {
-            console.log(`Version mismatch or first load. Stored: ${storedVersion}, New: ${APP_VERSION}. Clearing old data.`);
-            
-            // Clear old data
-            window.localStorage.removeItem('visitedPlaces');
-            window.localStorage.removeItem('usefulLinks');
-            
-            // Initialize state with fresh default data from tripData
-            setVisitedPlaces(new Set());
-            setUsefulLinks(tripData.usefulLinks);
-            
-            // Store the new version to prevent this from running again until the data changes
-            window.localStorage.setItem('tripVersion', APP_VERSION);
-        }
-    } catch (error) {
-        console.error("Error during app version check in localStorage", error);
+    const storedVersion = window.localStorage.getItem('tripVersion');
+
+    if (storedVersion !== APP_VERSION_IDENTIFIER) {
+      console.log(`Version change detected. Stored: ${storedVersion}, New: ${APP_VERSION_IDENTIFIER}.`);
+
+      const getTripId = (versionIdentifier: string | null) => {
+        if (!versionIdentifier) return null;
+        return versionIdentifier.split('-v')[0];
+      };
+
+      const newTripId = getTripId(APP_VERSION_IDENTIFIER);
+      const oldTripId = getTripId(storedVersion);
+
+      if (newTripId !== oldTripId) {
+        console.log(`New trip detected ('${newTripId}' vs '${oldTripId}'). Clearing all user data.`);
+        window.localStorage.removeItem('visitedPlaces');
+        window.localStorage.removeItem('usefulLinks');
+        setVisitedPlaces(new Set());
+        setUsefulLinks(tripData.usefulLinks);
+      } else {
+        console.log("Same trip, minor version update. User data will be preserved.");
+      }
+      
+      window.localStorage.setItem('tripVersion', APP_VERSION_IDENTIFIER);
+
+      // Force a hard refresh to get the latest assets and bypass service worker cache
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(registrations => {
+          const unregisterPromises = registrations.map(registration => registration.unregister());
+          
+          Promise.all(unregisterPromises).then(() => {
+            console.log('All service workers unregistered.');
+            // Also clear all caches for good measure
+            caches.keys().then(keys => {
+              const deletePromises = keys.map(key => caches.delete(key));
+              Promise.all(deletePromises).then(() => {
+                console.log('All caches cleared. Reloading page.');
+                window.location.reload();
+              });
+            });
+          });
+        });
+      } else {
+        window.location.reload();
+      }
     }
-  }, [APP_VERSION]);
+  }, [APP_VERSION_IDENTIFIER]);
+
 
   useEffect(() => {
     try {
-      // Avoid saving an empty set on the initial render if data was just cleared
       if (visitedPlaces.size > 0 || window.localStorage.getItem('visitedPlaces') !== null) {
           window.localStorage.setItem('visitedPlaces', JSON.stringify(Array.from(visitedPlaces)));
       }
@@ -99,7 +125,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200">
-      <Header title={tripData.title} dates={tripData.dates} />
+      <Header title={tripData.title} dates={tripData.dates} versionIdentifier={APP_VERSION_IDENTIFIER} />
       <main className="container mx-auto px-4 py-8">
         <UsefulLinks links={usefulLinks} onLinksChange={setUsefulLinks} />
         {tripData.itinerary.map((day, index) => (
