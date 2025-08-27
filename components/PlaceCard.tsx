@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Place } from './types';
 import { IconMapPin, IconLink, IconSparkles, IconCalendar, IconCheck, IconWaze } from './Icons';
@@ -52,125 +53,35 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place, isVisited, onToggleVisited
     return null;
   };
 
-const handleAiGuideClick = async () => {
-  const aiGuideQuery = `Pověz mi zajímavosti o: ${place.title}`;
-  
-  // Detekce Android zařízení
-  const isAndroid = /Android/i.test(navigator.userAgent);
-  
-  if (isAndroid) {
-    // Android Intent URL pro Gemini aplikaci
-    const intentUrl = `intent://gemini.google.com/app?prompt=${encodeURIComponent(aiGuideQuery)}#Intent;scheme=https;package=com.google.android.apps.bard;S.browser_fallback_url=${encodeURIComponent('https://gemini.google.com/app?prompt=' + encodeURIComponent(aiGuideQuery))};end`;
+  const handleAiGuideClick = async () => {
+    const aiGuideQuery = `Pověz mi zajímavosti o: ${place.title}`;
     
-    try {
-      // Pokus o otevření Intent URL
-      window.location.href = intentUrl;
-      return;
-    } catch (error) {
-      console.error('Chyba při otevírání Intent URL:', error);
-      // Pokračujeme k fallback řešení
+    // The Web Share API is the most reliable and user-friendly method for mobile devices.
+    // It allows the user to choose their preferred application from the native share sheet.
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `AI Průvodce: ${place.title}`,
+          text: aiGuideQuery,
+        });
+        return; // Success, action is complete.
+      } catch (error) {
+        // If the user cancels the share dialog, browsers throw an AbortError.
+        // In this case, we don't want to proceed to the fallback. We just stop.
+        if (error instanceof DOMException && error.name === 'AbortError') {
+          console.log('Sdílení bylo zrušeno uživatelem.');
+          return;
+        }
+        // For any other unexpected errors, we log it and then proceed to the fallback.
+        console.error('Chyba při sdílení, používám fallback:', error);
+      }
     }
-  }
   
-  // Alternativní přístup pro Android - přímý pokus o otevření aplikace
-  if (isAndroid) {
-    try {
-      // Pokus o otevření Gemini aplikace pomocí custom scheme
-      const geminiAppUrl = `gemini://chat?message=${encodeURIComponent(aiGuideQuery)}`;
-      window.location.href = geminiAppUrl;
-      
-      // Časový limit - pokud se aplikace neotevře, použije se fallback
-      setTimeout(() => {
-        // Fallback na webovou verzi
-        const webUrl = `https://gemini.google.com/app?prompt=${encodeURIComponent(aiGuideQuery)}`;
-        window.open(webUrl, '_blank', 'noopener,noreferrer');
-      }, 1000);
-      
-      return;
-    } catch (error) {
-      console.error('Chyba při otevírání Gemini app URL:', error);
-    }
-  }
-  
-  // Web Share API pro sdílení (funguje i na mobilních zařízeních)
-  if (navigator.share) {
-    try {
-      await navigator.share({
-        title: `AI Průvodce: ${place.title}`,
-        text: aiGuideQuery,
-        url: `https://gemini.google.com/app?prompt=${encodeURIComponent(aiGuideQuery)}`
-      });
-      return;
-    } catch (error) {
-      console.error('Chyba při sdílení:', error);
-      // Pokračujeme k poslednímu fallback
-    }
-  }
-  
-  // Univerzální fallback - otevření webové verze Gemini
-  const webUrl = `https://gemini.google.com/app?prompt=${encodeURIComponent(aiGuideQuery)}`;
-  window.open(webUrl, '_blank', 'noopener,noreferrer');
-};
-
-// Alternativní funkce s lepší detekcí dostupnosti aplikace
-const handleAiGuideClickAdvanced = async () => {
-  const aiGuideQuery = `Pověz mi zajímavosti o: ${place.title}`;
-  const isAndroid = /Android/i.test(navigator.userAgent);
-  
-  if (isAndroid) {
-    // Pokus o detekci, zda je Gemini aplikace nainstalovaná
-    const checkAppInstalled = () => {
-      return new Promise((resolve) => {
-        const iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        
-        const cleanup = () => {
-          document.body.removeChild(iframe);
-        };
-        
-        const timeout = setTimeout(() => {
-          cleanup();
-          resolve(false); // Aplikace pravděpodobně není nainstalovaná
-        }, 2000);
-        
-        iframe.onload = () => {
-          clearTimeout(timeout);
-          cleanup();
-          resolve(true); // Aplikace je pravděpodobně nainstalovaná
-        };
-        
-        document.body.appendChild(iframe);
-        iframe.src = `intent://gemini.google.com/app#Intent;scheme=https;package=com.google.android.apps.bard;end`;
-      });
-    };
-    
-    const isAppInstalled = await checkAppInstalled();
-    
-    if (isAppInstalled) {
-      // Otevření přes Intent
-      const intentUrl = `intent://gemini.google.com/app?prompt=${encodeURIComponent(aiGuideQuery)}#Intent;scheme=https;package=com.google.android.apps.bard;S.browser_fallback_url=${encodeURIComponent('https://gemini.google.com/app?prompt=' + encodeURIComponent(aiGuideQuery))};end`;
-      window.location.href = intentUrl;
-      return;
-    }
-  }
-  
-  // Fallback na webovou verzi nebo sdílení
-  if (navigator.share) {
-    try {
-      await navigator.share({
-        title: `AI Průvodce: ${place.title}`,
-        text: aiGuideQuery,
-        url: `https://gemini.google.com/app?prompt=${encodeURIComponent(aiGuideQuery)}`
-      });
-    } catch (error) {
-      const webUrl = `https://gemini.google.com/app?prompt=${encodeURIComponent(aiGuideQuery)}`;
-      window.open(webUrl, '_blank', 'noopener,noreferrer');
-    }
-  } else {
-    const webUrl = `https://gemini.google.com/app?prompt=${encodeURIComponent(aiGuideQuery)}`;
+    // Fallback for desktops or if the Share API fails for unexpected reasons.
+    const encodedQuery = encodeURIComponent(aiGuideQuery);
+    const webUrl = `https://gemini.google.com/app?prompt=${encodedQuery}`;
     window.open(webUrl, '_blank', 'noopener,noreferrer');
-  }
-};
+  };
   
   const wazeLink = getWazeLink();
   
@@ -248,4 +159,5 @@ const handleAiGuideClickAdvanced = async () => {
     </div>
   );
 };
+
 export default PlaceCard;
