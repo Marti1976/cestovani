@@ -42,7 +42,7 @@ export interface ItineraryDay {
 }
 
 export interface TripData {
-  version: string;
+  versionIdentifier: string;
   title: string;
   dates: string;
   itinerary: ItineraryDay[];
