@@ -1,7 +1,7 @@
 import { TripData } from './components/types';
 
 export const tripData: TripData = {
-  versionIdentifier: 'slovakia-2025-v1',
+  versionIdentifier: 'slovakia-2025-v2',
   title: 'Cestovní plán 2025 – Slovensko',
   dates: '30. srpna - 6. září',
   usefulLinks: [
