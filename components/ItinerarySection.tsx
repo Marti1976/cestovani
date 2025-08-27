@@ -13,9 +13,9 @@ interface ItinerarySectionProps {
 
 const ItinerarySection: React.FC<ItinerarySectionProps> = ({ data, visitedPlaces, onToggleVisited }) => {
   
-  const CHUNK_SIZE = 10; // Bezpečná velikost pro URL, aby nedošlo k jejímu oříznutí
+  const CHUNK_SIZE = 10; // The number of places to show on the map at once.
 
-  // Funkce pro rozdělení pole míst na menší části
+  // Function to split the array of places into smaller chunks
   const getPlaceChunks = (places: Place[]): Place[][] => {
     const chunks: Place[][] = [];
     if (!places) return chunks;
@@ -29,9 +29,21 @@ const ItinerarySection: React.FC<ItinerarySectionProps> = ({ data, visitedPlaces
 
   const handleShowChunkOnMap = (placesInChunk: Place[]) => {
     if (placesInChunk.length === 0) return;
-    const locationsQuery = placesInChunk.map(p => encodeURIComponent(p.title)).join('|');
-    const mapUrl = `https://www.google.com/maps/search/?api=1&query=${locationsQuery}`;
-    window.open(mapUrl, '_blank');
+
+    // Use Mapy.cz which handles multiple query parameters gracefully.
+    // This is more robust than a single long query for Google Maps.
+    // We use the "turisticka" (tourist) map, which is ideal for travel.
+    const baseUrl = 'https://mapy.cz/turisticka';
+    
+    // Use URLSearchParams for robust and safe query string construction.
+    // This prevents malformed URLs (e.g., trailing '&' or incorrect encoding).
+    const params = new URLSearchParams();
+    placesInChunk.forEach(place => {
+      params.append('q', place.title);
+    });
+
+    const mapUrl = `${baseUrl}?${params.toString()}`;
+    window.open(mapUrl, '_blank', 'noopener,noreferrer');
   };
 
 
