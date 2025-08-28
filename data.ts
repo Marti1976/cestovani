@@ -9,8 +9,6 @@ export const tripData: TripData = {
       id: 1,
       title: 'Slovenská dálniční známka (e-známka)',
       url: 'https://eznamka.sk/',
-    },
-    {
       id: 2,
       title: 'Zoznam SK',
       url: 'https://www.zoznam.sk/',
