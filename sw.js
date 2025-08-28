@@ -1,3 +1,4 @@
+
 const CACHE_NAME = 'travel-planner-v4'; // Incremented version to ensure cache update
 
 // No more static pre-caching list
