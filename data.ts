@@ -1,7 +1,7 @@
 import { TripData } from './components/types';
 
 export const tripData: TripData = {
-  versionIdentifier: 'slovakia-2025-v4',
+  versionIdentifier: 'slovakia-2025-v5',
   title: 'Cestovní plán 2025 – Slovensko',
   dates: '30. srpna - 6. září',
   usefulLinks: [
@@ -9,6 +9,11 @@ export const tripData: TripData = {
       id: 1,
       title: 'Slovenská dálniční známka (e-známka)',
       url: 'https://eznamka.sk/',
+    },
+    {
+      id: 2,
+      title: 'Zoznam SK',
+      url: 'https://www.zoznam.sk/',
     },
   ],
   itinerary: [
