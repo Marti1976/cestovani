@@ -1,54 +1,13 @@
 
-const CACHE_NAME = 'travel-planner-v4'; // Incremented version to ensure cache update
-
-// No more static pre-caching list
+const CACHE_NAME = 'travel-planner-v4'; // The version name logic is still fine.
 
 self.addEventListener('install', event => {
-  // The service worker is installed, but we are not pre-caching assets.
-  // Caching will happen on-the-fly during fetch events.
-  // self.skipWaiting() ensures that the new service worker activates immediately.
+  // Activate new service worker as soon as it's installed
   event.waitUntil(self.skipWaiting());
 });
 
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        // If the resource is in the cache, return it
-        if (response) {
-          return response;
-        }
-
-        // Otherwise, fetch it from the network
-        return fetch(event.request).then(
-          response => {
-            // Check if we received a valid response
-            if(!response || response.status !== 200 || (response.type !== 'basic' && response.type !== 'opaque')) {
-               return response;
-            }
-
-            // IMPORTANT: Clone the response. A response is a stream
-            // and because we want the browser to consume the response
-            // as well as the cache consuming the response, we need
-            // to clone it so we have two streams.
-            const responseToCache = response.clone();
-
-            caches.open(CACHE_NAME)
-              .then(cache => {
-                cache.put(event.request, responseToCache);
-              });
-
-            return response;
-          }
-        ).catch(() => {
-          // If the network request fails and there's no cache match,
-          // the browser will show its default offline page.
-        });
-      })
-    );
-});
-
 self.addEventListener('activate', event => {
+  // Clean up old caches
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
     caches.keys().then(cacheNames => {
@@ -60,6 +19,27 @@ self.addEventListener('activate', event => {
           }
         })
       );
-    })
+    }).then(() => self.clients.claim()) // Take control of all clients immediately
+  );
+});
+
+self.addEventListener('fetch', event => {
+  // Use a "Network falling back to cache" strategy
+  event.respondWith(
+    fetch(event.request)
+      .then(networkResponse => {
+        // If the fetch is successful, cache the new response and return it
+        return caches.open(CACHE_NAME).then(cache => {
+          // Check if we received a valid response before caching
+          if (networkResponse && networkResponse.status === 200) {
+            cache.put(event.request, networkResponse.clone());
+          }
+          return networkResponse;
+        });
+      })
+      .catch(() => {
+        // If the network request fails (e.g., offline), try to serve from cache
+        return caches.match(event.request);
+      })
   );
 });
