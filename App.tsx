@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback, useEffect } from 'react';
 import { tripData } from './data';
 import { Place, UsefulLink } from './components/types';
@@ -60,25 +61,40 @@ const App: React.FC = () => {
       window.localStorage.setItem('tripVersion', APP_VERSION_IDENTIFIER);
 
       // Force a hard refresh to get the latest assets and bypass service worker cache
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistrations().then(registrations => {
-          const unregisterPromises = registrations.map(registration => registration.unregister());
-          
-          Promise.all(unregisterPromises).then(() => {
-            console.log('All service workers unregistered.');
-            // Also clear all caches for good measure
-            caches.keys().then(keys => {
-              const deletePromises = keys.map(key => caches.delete(key));
-              Promise.all(deletePromises).then(() => {
-                console.log('All caches cleared. Reloading page.');
-                window.location.reload();
-              });
-            });
-          });
-        });
-      } else {
-        window.location.reload();
-      }
+      const clearCacheAndReload = async () => {
+        try {
+          if ('serviceWorker' in navigator) {
+            // Wait for the service worker to be ready to avoid race conditions,
+            // but with a timeout to prevent hanging indefinitely.
+            const readyWithTimeout = Promise.race([
+              navigator.serviceWorker.ready,
+              new Promise((_, reject) => setTimeout(() => reject(new Error('Service Worker ready timeout')), 2000))
+            ]);
+
+            await readyWithTimeout;
+            
+            const registrations = await navigator.serviceWorker.getRegistrations();
+            if (registrations && registrations.length) {
+              await Promise.all(registrations.map(r => r.unregister()));
+              console.log('All service workers unregistered.');
+            }
+
+            const cacheKeys = await caches.keys();
+            if (cacheKeys && cacheKeys.length) {
+              await Promise.all(cacheKeys.map(key => caches.delete(key)));
+              console.log('All caches cleared.');
+            }
+          }
+        } catch (error) {
+          console.error('Failed to clear service worker or cache:', error);
+          // The process will continue to the finally block to reload.
+        } finally {
+          console.log('Reloading page due to version change.');
+          window.location.reload();
+        }
+      };
+      
+      clearCacheAndReload();
     }
   }, [APP_VERSION_IDENTIFIER]);
 
