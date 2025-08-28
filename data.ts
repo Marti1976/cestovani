@@ -1,7 +1,7 @@
 import { TripData } from './components/types';
 
 export const tripData: TripData = {
-  versionIdentifier: 'slovakia-2025-v3',
+  versionIdentifier: 'slovakia-2025-v4',
   title: 'Cestovní plán 2025 – Slovensko',
   dates: '30. srpna - 6. září',
   usefulLinks: [
@@ -101,6 +101,14 @@ export const tripData: TripData = {
         mapLink: 'https://www.google.com/maps/search/?api=1&query=Nádvoří+Evropy+Komárno',
       },
       places: [
+        {
+          title: 'Termálne kúpalisko Thermal Corvinus Veľký Meder',
+          rating: '★ 4,5',
+          tags: ['cca 30 km', 'termální lázně'],
+          description: 'Velký a moderní termální aquapark s 9 bazény a celoročním provozem. Ideální pro relaxaci a odpočinek. Nabízí vnitřní i venkovní bazény s léčivou vodou, tobogány a wellness centrum.',
+          mapLink: 'https://www.google.com/maps/search/?api=1&query=Thermal+Corvinus+Veľký+Meder',
+          webLink: 'https://www.thermalcorvinus.sk/',
+        },
         {
           title: 'Pevnost Komárno',
           rating: '★ 4,5 (1247)',
@@ -251,6 +259,18 @@ export const tripData: TripData = {
         duration: 'cca 1 hod 15 min',
       },
       places: [
+        {
+          title: 'Komjatice - rodiště babičky',
+          tags: ['rodinná historie', 'na trase'],
+          description: 'Zastávka v obci Komjatice, kde se narodila babička. Možnost projít se po místech spojených s rodinnou historií.',
+          mapLink: 'https://www.google.com/maps/search/?api=1&query=Komjatice',
+        },
+        {
+          title: 'Veľké Ripňany - rodiště dědečka',
+          tags: ['rodinná historie', 'na trase'],
+          description: 'Krátká návštěva obce Veľké Ripňany, rodiště dědečka. Místo pro vzpomínku a seznámení se s kořeny rodiny.',
+          mapLink: 'https://www.google.com/maps/search/?api=1&query=Veľké+Ripňany',
+        },
         {
           title: 'Nitrianský hrad',
           rating: '★ 4,5',
