@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback, useEffect } from 'react';
 import { tripData } from './data';
 import { Place, UsefulLink } from './components/types';
@@ -55,46 +54,51 @@ const App: React.FC = () => {
         setVisitedPlaces(new Set());
         setUsefulLinks(tripData.usefulLinks);
       } else {
-        console.log("Same trip, minor version update. User data will be preserved.");
+        console.log("Same trip, minor version update. Merging useful links and preserving user data.");
+        
+        // Merge useful links
+        const storedLinksJSON = window.localStorage.getItem('usefulLinks');
+        const newDefaultLinks = tripData.usefulLinks;
+
+        if (storedLinksJSON) {
+            try {
+                const storedLinks: UsefulLink[] = JSON.parse(storedLinksJSON);
+                const linksMap = new Map<string, UsefulLink>();
+                
+                // Add stored links first to prioritize user's customizations and additions
+                storedLinks.forEach(link => linksMap.set(link.url, link));
+
+                // Add new default links only if their URL is not already present
+                newDefaultLinks.forEach(link => {
+                    if (!linksMap.has(link.url)) {
+                        linksMap.set(link.url, link);
+                    }
+                });
+                
+                const mergedLinks = Array.from(linksMap.values());
+                
+                // Update state and localStorage before reload
+                setUsefulLinks(mergedLinks);
+                window.localStorage.setItem('usefulLinks', JSON.stringify(mergedLinks));
+
+            } catch(e) {
+                 console.error("Failed to parse or merge useful links, resetting to default.", e);
+                 setUsefulLinks(newDefaultLinks);
+                 window.localStorage.setItem('usefulLinks', JSON.stringify(newDefaultLinks));
+            }
+        } else {
+            // No stored links, just use the new defaults
+            setUsefulLinks(newDefaultLinks);
+            window.localStorage.setItem('usefulLinks', JSON.stringify(newDefaultLinks));
+        }
       }
       
       window.localStorage.setItem('tripVersion', APP_VERSION_IDENTIFIER);
 
-      // Force a hard refresh to get the latest assets and bypass service worker cache
-      const clearCacheAndReload = async () => {
-        try {
-          if ('serviceWorker' in navigator) {
-            // Wait for the service worker to be ready to avoid race conditions,
-            // but with a timeout to prevent hanging indefinitely.
-            const readyWithTimeout = Promise.race([
-              navigator.serviceWorker.ready,
-              new Promise((_, reject) => setTimeout(() => reject(new Error('Service Worker ready timeout')), 2000))
-            ]);
-
-            await readyWithTimeout;
-            
-            const registrations = await navigator.serviceWorker.getRegistrations();
-            if (registrations && registrations.length) {
-              await Promise.all(registrations.map(r => r.unregister()));
-              console.log('All service workers unregistered.');
-            }
-
-            const cacheKeys = await caches.keys();
-            if (cacheKeys && cacheKeys.length) {
-              await Promise.all(cacheKeys.map(key => caches.delete(key)));
-              console.log('All caches cleared.');
-            }
-          }
-        } catch (error) {
-          console.error('Failed to clear service worker or cache:', error);
-          // The process will continue to the finally block to reload.
-        } finally {
-          console.log('Reloading page due to version change.');
-          window.location.reload();
-        }
-      };
-      
-      clearCacheAndReload();
+      // With a "Network First" service worker, a simple reload is enough
+      // to fetch the updated assets. The aggressive unregistering is no longer needed.
+      console.log('Data updated, reloading page to apply changes.');
+      window.location.reload();
     }
   }, [APP_VERSION_IDENTIFIER]);
 
