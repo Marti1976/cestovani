@@ -1,5 +1,5 @@
 
-const CACHE_NAME = 'travel-planner-v4'; // The version name logic is still fine.
+const CACHE_NAME = 'travel-planner-v7'; // The version name logic is still fine.
 
 self.addEventListener('install', event => {
   // Activate new service worker as soon as it's installed
