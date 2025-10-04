@@ -13,7 +13,7 @@ export const TravelInfoCard: React.FC<TravelInfoCardProps> = ({ travelInfo }) =>
       <IconCar />
       <p>{travelInfo.title}</p>
     </div>
-    <p className="text-slate-600 dark:text-slate-300 mt-1 pl-9">{travelInfo.description}</p>
+    <p className="text-slate-600 dark:text-slate-300 mt-1 pl-9 whitespace-pre-line">{travelInfo.description}</p>
     {(travelInfo.distance || travelInfo.duration) && (
       <div className="mt-3 pl-9 flex items-center gap-6 text-sm text-slate-500 dark:text-slate-400">
         {travelInfo.distance && (
