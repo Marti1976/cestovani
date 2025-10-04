@@ -8,7 +8,7 @@ import LoginOverlay from './components/LoginOverlay';
 import UsefulLinks from './components/UsefulLinks';
 
 const App: React.FC = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('isAuthenticated') === 'true');
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => localStorage.getItem('isLoggedIn') === 'true');
   const [showUpdatePrompt, setShowUpdatePrompt] = useState(false);
   
   const APP_VERSION_IDENTIFIER = tripData.versionIdentifier;
@@ -33,16 +33,6 @@ const App: React.FC = () => {
       return tripData.usefulLinks;
     }
   });
-
-  const [collapsedSections, setCollapsedSections] = useState<Set<string>>(() => {
-    try {
-      const item = window.localStorage.getItem('collapsedSections');
-      return item ? new Set(JSON.parse(item)) : new Set();
-    } catch (error) {
-      console.error("Could not parse collapsed sections from localStorage", error);
-      return new Set();
-    }
-  });
   
   useEffect(() => {
     const storedVersion = window.localStorage.getItem('tripVersion');
@@ -62,10 +52,8 @@ const App: React.FC = () => {
         console.log(`New trip detected ('${newTripId}' vs '${oldTripId}'). Clearing all user data.`);
         window.localStorage.removeItem('visitedPlaces');
         window.localStorage.removeItem('usefulLinks');
-        window.localStorage.removeItem('collapsedSections');
         setVisitedPlaces(new Set());
         setUsefulLinks(tripData.usefulLinks);
-        setCollapsedSections(new Set());
       } else {
         console.log("Same trip, minor version update. Merging useful links and preserving user data.");
         
@@ -129,38 +117,10 @@ const App: React.FC = () => {
     }
   }, [usefulLinks]);
 
-  useEffect(() => {
-    try {
-      window.localStorage.setItem('collapsedSections', JSON.stringify(Array.from(collapsedSections)));
-    } catch (error) {
-      console.error("Could not save collapsed sections to localStorage", error);
-    }
-  }, [collapsedSections]);
-  
-  useEffect(() => {
-    const sectionsToCollapse = new Set<string>();
-    tripData.itinerary.forEach(day => {
-      if (day.places && day.places.length > 0) {
-        const allVisited = day.places.every(place => visitedPlaces.has(place.title));
-        if (allVisited) {
-          sectionsToCollapse.add(day.sectionTitle);
-        }
-      }
-    });
-
-    if (sectionsToCollapse.size > 0) {
-      setCollapsedSections(prev => {
-        const newSet = new Set(prev);
-        sectionsToCollapse.forEach(title => newSet.add(title));
-        return newSet;
-      });
-    }
-  }, [visitedPlaces]);
-
 
   const handleLoginSuccess = () => {
-    localStorage.setItem('isAuthenticated', 'true');
-    setIsAuthenticated(true);
+    localStorage.setItem('isLoggedIn', 'true');
+    setIsLoggedIn(true);
   };
   
   const toggleVisited = (placeTitle: string) => {
@@ -175,29 +135,7 @@ const App: React.FC = () => {
     });
   };
 
-  const toggleSectionCollapse = (sectionTitle: string) => {
-    setCollapsedSections(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(sectionTitle)) {
-        newSet.delete(sectionTitle);
-      } else {
-        newSet.add(sectionTitle);
-      }
-      return newSet;
-    });
-  };
-
-  const collapseAll = () => {
-    const allSectionTitles = tripData.itinerary.map(day => day.sectionTitle);
-    setCollapsedSections(new Set(allSectionTitles));
-  };
-
-  const expandAll = () => {
-    setCollapsedSections(new Set());
-  };
-
-
-  if (!isAuthenticated) {
+  if (!isLoggedIn) {
     return <LoginOverlay onSuccess={handleLoginSuccess} />;
   }
 
@@ -206,23 +144,14 @@ const App: React.FC = () => {
       <Header title={tripData.title} dates={tripData.dates} versionIdentifier={APP_VERSION_IDENTIFIER} />
       <main className="container mx-auto px-4 py-8">
         <UsefulLinks links={usefulLinks} onLinksChange={setUsefulLinks} />
-        <div className="flex justify-end gap-2 mb-4">
-          <button onClick={collapseAll} className="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-600 transition-colors">
-            Sbalit vše
-          </button>
-          <button onClick={expandAll} className="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-600 transition-colors">
-            Rozbalit vše
-          </button>
-        </div>
-        {tripData.itinerary.map((day, index) => (
-          <ItinerarySection 
-            key={index} 
-            data={day} 
-            visitedPlaces={visitedPlaces}
-            onToggleVisited={toggleVisited}
-            isCollapsed={collapsedSections.has(day.sectionTitle)}
-            onToggleCollapse={() => toggleSectionCollapse(day.sectionTitle)}
-          />
+        {tripData.itinerary
+          .map((day, index) => (
+            <ItinerarySection 
+              key={index} 
+              data={day} 
+              visitedPlaces={visitedPlaces}
+              onToggleVisited={toggleVisited}
+            />
         ))}
       </main>
       <Footer />
