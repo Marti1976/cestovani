@@ -1,4 +1,5 @@
 export interface Place {
+  id: number;
   title: string;
   rating?: string;
   tags: string[];
@@ -36,6 +37,7 @@ export interface UsefulLink {
 export interface ItineraryDay {
   sectionTitle: string;
   travelInfo?: TravelInfo;
+  accommodation?: Accommodation;
   recommendation?: Recommendation;
   places: Place[];
   isFinalDay?: boolean;
