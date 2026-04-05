@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+/* Global styles */
+:root {
+  --primary: #1e40af;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+}
