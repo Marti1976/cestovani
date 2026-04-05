@@ -1,6 +1,3 @@
-
-
-# Cestovní Plánovač – Návod k Nasazení a Použití
-
-
-
+@2026 renew
+# Cestovní Plánovač NEW
+Me@Studio Google AI

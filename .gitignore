@@ -42,4 +42,6 @@ coverage/
 # TypeScript
 *.tsbuildinfo
 
-# Ignore README.md + CTI_ME everywhere
+# Ignore TEXT file
+CTI_ME/
+import/
