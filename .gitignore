@@ -43,5 +43,3 @@ coverage/
 *.tsbuildinfo
 
 # Ignore README.md + CTI_ME everywhere
-/README.md
-CTI_ME/
