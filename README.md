@@ -1,3 +1,5 @@
-@2026 renew
+@2024-26
+
 # Cestovní Plánovač NEW
+
 Me@Studio Google AI
