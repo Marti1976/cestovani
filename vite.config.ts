@@ -11,7 +11,7 @@ export default defineConfig({
   // This setting is crucial for deploying to a sub-path on GitHub Pages.
   // It tells Vite to prefix all asset paths with '/cestovani/' only when building on GitHub.
   // Otherwise, it uses the root path '/' for local development and AI Studio previews.
-  base: process.env.GITHUB_ACTIONS ? '/cestovani/' : '/',
+  base: './',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('.', import.meta.url)),

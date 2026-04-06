@@ -1,5 +1,5 @@
 
-const CACHE_NAME = 'travel-planner-v6';
+const CACHE_NAME = 'BALIv7';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
