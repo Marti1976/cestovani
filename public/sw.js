@@ -1,5 +1,5 @@
 
-const CACHE_NAME = 'BALIv7';
+const CACHE_NAME = 'SLOVAKIAv7';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
