@@ -143,14 +143,6 @@ const App: React.FC = () => {
     <div className="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200">
       <Header title={tripData.title} dates={tripData.dates} versionIdentifier={APP_VERSION_IDENTIFIER} />
       <main className="container mx-auto px-4 py-8">
-        <div className="mb-8 overflow-hidden rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700">
-          <img 
-            src="./icons/z1.jpg" 
-            alt="Cestovní náhled" 
-            className="w-full aspect-video object-cover"
-            referrerPolicy="no-referrer"
-          />
-        </div>
         <UsefulLinks links={usefulLinks} onLinksChange={setUsefulLinks} />
         {tripData.itinerary.map((day, index) => (
           <ItinerarySection 
