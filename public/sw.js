@@ -1,16 +1,17 @@
 
-const CACHE_NAME = 'SLOVAKIAv10';
+const CACHE_NAME = 'SLOVAKIAv11';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
-  './manifest.json?v=10',
+  './manifest.json?v=11',
   './icons/icons16.png',
   './icons/icons32.png',
   './icons/icons64.png',
   './icons/icons128.png',
   './icons/icons192.png',
   './icons/icons256.png',
-  './icons/icons512.png'
+  './icons/icons512.png',
+  './icons/z1.jpg'
 ];
 
 self.addEventListener('install', event => {
