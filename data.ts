@@ -1,7 +1,7 @@
 import { TripData } from './components/types';
 
 export const tripData: TripData = {
-  versionIdentifier: '2026-poland-v2',
+  versionIdentifier: '2026-poland-v8',
   title: 'Cestovní plán 2026 – Polsko',
   dates: '18. – 24. července',
   usefulLinks: [
@@ -44,41 +44,63 @@ export const tripData: TripData = {
         description: 'Cesta do Vratislavi a ubytování.',
       },
       accommodation: {
-        name: 'RentPlanet - Apartamenty Zerembowicza II',
-        address: 'Władysława Zarembowicza 31-37, Fabryczna, 54-530 Vratislav, Polsko',
-        mapLink: 'https://www.google.com/maps/search/?api=1&query=RentPlanet+-+Apartamenty+Zerembowicza+II+Wroclaw',
-        bookingLink: 'https://www.booking.com/searchresults.cs.html?ss=RentPlanet+-+Apartamenty+Zerembowicza+II'
+        name: 'GAJA apartments',
+        address: 'Działkowa 19, 50-538 Vratislav, Polsko',
+        mapLink: 'https://www.google.com/maps/search/?api=1&query=GAJA+apartments+Dzialkova+19+Wroclaw',
+        bookingLink: 'https://www.booking.com/searchresults.cs.html?ss=GAJA+apartments+Wroclaw'
       },
       recommendation: {
         title: 'Doporučení na večer ve Vratislavi',
-        text: 'Po příjezdu a ubytování doporučujeme klidnou a příjemnou procházku v okolí ubytování nebo v historickém centru. Skvělou volbou je přírodní park podél řeky Bystrzyca, moderní Park Tysiąclecia, nebo magický a večer plně osvětlený Ostrov Tumski.',
+        text: 'Po příjezdu a ubytování v GAJA apartments doporučujeme vynikající jídlo či řemeslné pivo v blízkém okolí a následnou klidnou podvečerní procházku v některém z krásných přilehlých parků.',
         places: [
           {
-            title: 'Procházka podél řeky Bystrzyca a lesík (Las Kuźnicki)',
-            tags: ['Wrocław', 'Večerní doporučení', 'Příroda'],
-            description: 'Příjemná a klidná stezka divočejším lesním parkem podél břehu meandrující řeky Bystrzyca, situovaná v blízkosti ubytování v západní části města.',
-            mapLink: 'https://www.google.com/maps/search/?api=1&query=Las+Kuznicki+Wroclaw',
-            webLink: 'https://www.wroclaw.pl',
+            title: 'Restaurace El Gordito',
+            rating: '★ 4,7',
+            tags: ['Wrocław', 'Mexická kuchyně', 'Bistro'],
+            description: 'Autentické mexické bistro a restaurace nabízející vynikající tacos, quesadilly a další speciality přímo v sousedství vašeho ubytování na al. Armii Krajowej 14b/1.',
+            mapLink: 'https://www.google.com/maps/search/?api=1&query=El+Gordito+Armii+Krajowej+14b+Wroclaw',
           },
           {
-            title: 'Park Tysiąclecia (Park Tisíciletí)',
-            tags: ['Wrocław', 'Večerní doporučení', 'Park'],
-            description: 'Moderní rekreační městský park s cyklostezkami a travnatými plochami, ideální pro podvečerní procházku a odpočinek po dlouhé cestě.',
-            mapLink: 'https://www.google.com/maps/search/?api=1&query=Park+Tysiaclecia+Wroclaw',
-            webLink: 'https://www.wroclaw.pl',
+            title: 'Pizzeria Mania Smaku - Ślężna',
+            rating: '★ 4,6',
+            tags: ['Wrocław', 'Gastro zážitek', 'Pizza'],
+            description: 'Vyhlášená vratislavská pizzerie známá svými originálními kombinacemi chutí a skvělým těstem na ulici Ślężna.',
+            mapLink: 'https://www.google.com/maps/search/?api=1&query=Pizzeria+Mania+Smaku+Slezna+Wroclaw',
           },
           {
-            title: 'Ostrov Tumski (Dómský ostrov)',
-            tags: ['Wrocław', 'Večerní doporučení', 'Historické centrum'],
-            description: 'Nejstarší obydlená část Vratislavi s jedinečnou romantickou atmosférou. Každý večer zde lampář v tradičním černém plášti ručně rozsvěcuje plynové lucerny.',
-            mapLink: 'https://www.google.com/maps/search/?api=1&query=Ostrow+Tumski+Wroclaw',
-            webLink: 'https://www.visitwroclaw.eu',
+            title: 'Gastropub Trzy Bulwy',
+            rating: '★ 4,5',
+            tags: ['Wrocław', 'Pivní bar', 'Burgery'],
+            description: 'Populární gastropub a pivní bar se skvělým výběrem řemeslných piv a výbornými domácími burgery nedaleko ubytování.',
+            mapLink: 'https://www.google.com/maps/search/?api=1&query=Gastropub+Trzy+Bulwy+Wroclaw',
+          },
+          {
+            title: 'Park Tarnogajski',
+            rating: '★ 4,4',
+            tags: ['Wrocław', 'Podvečerní procházka', 'Park'],
+            description: 'Menší a velmi klidný sousedský park v bezprostřední blízkosti ubytování GAJA apartments, ideální pro rychlé vydechnutí po cestě.',
+            mapLink: 'https://www.google.com/maps/search/?api=1&query=Park+Tarnogajski+Wroclaw',
+          },
+          {
+            title: 'Park Skowroni',
+            rating: '★ 4,6',
+            tags: ['Wrocław', 'Lesní oáza', 'Park'],
+            description: 'Malebný rozlehlý park se vzrostlými stromy, klidnými lesními cestičkami a příjemnou atmosférou pro večerní relaxaci.',
+            mapLink: 'https://www.google.com/maps/search/?api=1&query=Park+Skowroni+Wroclaw',
+          },
+          {
+            title: 'Park Władysława Andersa a Wzgórze Andersa',
+            rating: '★ 4,5',
+            tags: ['Wrocław', 'Vyhlídka', 'Park'],
+            description: 'Pěkný park s přilehlým vyhlídkovým kopcem (Wzgórze Andersa), ze kterého se naskýtá pěkný výhled na jižní část města.',
+            mapLink: 'https://www.google.com/maps/search/?api=1&query=Park+Andersa+Wzgorze+Andersa+Wroclaw',
           },
         ]
       },
       places: [
         {
           title: 'Tvrz Bouda (ČR)',
+          rating: '★ 4,8',
           tags: ['ČR', 'Těchonín', 'Vojenská památka'],
           description: 'Jedna z pěti největších dělostřeleckých tvrzí československého opevnění. Unikátně zachovalá stavba s rozsáhlým podzemním labyrintem chodeb a sálů.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Tvrz+Bouda+Techonin',
@@ -86,6 +108,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Pevnost Kladsko',
+          rating: '★ 4,6',
           tags: ['Polsko', 'Kłodzko', 'Vojenská pevnost'],
           description: 'Monumentální barokní pevnost tyčící se nad historickým městem. Nabízí fascinující prohlídkové trasy s průvodcem i spletité podzemní labyrinty zvané minérské chodby.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Twierdza+Klodzko',
@@ -93,6 +116,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Medvědí jeskyně',
+          rating: '★ 4,7',
           tags: ['Polsko', 'Kletno', 'Přírodní krása'],
           description: 'Nejkrásnější krápníková jeskyně v Polsku, známá bohatou výzdobou ze stalaktitů a stalagmitů a jedinečnými kosterními nálezy zvířat z doby ledové.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Jaskinia+Niedzwedzia+Kletno',
@@ -100,6 +124,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Zámek Kamieniec Ząbkowicki',
+          rating: '★ 4,7',
           tags: ['Polsko', 'Kamieniec Ząbkowicki', 'Zámek'],
           description: 'Monumentální novogotický palác ze 19. století, navržený slavným Karlem Friedrichem Schinkelem pro princeznu Mariannu Oranžskou. Obklopuje ho obrovský romantický park.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Palac+Marianny+Oranskiej+Kamieniec+Zabkowicki',
@@ -107,6 +132,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Pevnost Stříbrná Hora',
+          rating: '★ 4,7',
           tags: ['Polsko', 'Srebrna Góra', 'Vojenská pevnost'],
           description: 'Největší horská pevnost v Evropě, vybudovaná v 18. století na obranu Slezska pruským králem Bedřichem Velikým. Nabízí úchvatný pohled do vojenské historie.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Twierdza+Srebrna+Gora',
@@ -114,6 +140,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Zámek a park v Krobielowicích',
+          rating: '★ 4,5',
           tags: ['Polsko', 'Krobielowice', 'Zámek'],
           description: 'Půvabný renesančně-barokní zámek s bohatou historií, dnes využívaný jako stylový hotel s vlastním golfovým hřištěm a krásným anglickým parkem.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Palac+Krobielowice',
@@ -121,6 +148,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Zámek a park Oleśnica',
+          rating: '★ 4,4',
           tags: ['Polsko', 'Oleśnica', 'Zámek'],
           description: 'Významné renesanční sídlo olešnických knížat s dochovaným gotickým opevněním, jedinečnou renesanční architekturou a malebným zámeckým parkem.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Zamek+Ksiazece+Olesnica',
@@ -128,6 +156,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Arboretum Wojsławice',
+          rating: '★ 4,8',
           tags: ['Polsko', 'Niemcza', 'Botanická zahrada'],
           description: 'Nádherná historická botanická zahrada, která proslula svými gigantickými sbírkami rododendronů, azalek a denivek. Místo plné barev a klidu.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Arboretum+Wojslawice',
@@ -135,6 +164,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Tourist Coal Mine in Nowa Ruda',
+          rating: '★ 4,7',
           tags: ['Polsko', 'Nowa Ruda', 'Technická památka'],
           description: 'Podzemní turistická trasa v bývalém uhelném dole. Představuje těžkou práci horníků, autentické stroje a nabízí jízdu pravým podzemním elektrickým vláčkem.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Dawna+Kopalnia+Nowa+Ruda',
@@ -151,13 +181,15 @@ export const tripData: TripData = {
       places: [
         {
           title: 'Hledání vratislavských trpaslíků (Krasnale)',
+          rating: '★ 4,8',
           tags: ['Wrocław', 'Zábava'],
-          description: 'Více než 600 drobných bronzových sošek trpaslíků je ukryto po celém městě. Hledání těchto malých obyvatel s originálními motivy je oblíbenou aktivitou návštěvníků.',
+          description: 'Více než 600 drobných bronzových sošek trpaslíků je ukryto po celém městě. Hledání těchto malých obyvatel s originálními motifs je oblíbenou aktivitou návštěvníků.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Krasnale+Wroclaw',
           webLink: 'https://www.krasnale.pl',
         },
         {
           title: 'Hydropolis',
+          rating: '★ 4,7',
           tags: ['Wrocław', 'Interaktivní muzeum', 'Technika'],
           description: 'Jediné polské vědecké a vzdělávací centrum kompletně zaměřené na vodu. Je umístěno v unikátní podzemní nádrži na pitnou vodu z roku 1893 s moderními expozicemi.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Hydropolis+Wroclaw',
@@ -165,6 +197,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Zoo Vratislav & Afrykarium',
+          rating: '★ 4,8',
           tags: ['Wrocław', 'Zoo', 'Akvárium'],
           description: 'Nejstarší a největší polská zoologická zahrada. Hlavním lákadlem je Afrykarium, obří unikátní pavilon představující vodní světy Afriky s úchvatným průhledným tunelem.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=ZOO+Wroclaw',
@@ -172,6 +205,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Vratislavská fontána',
+          rating: '★ 4,7',
           tags: ['Wrocław', 'Zážitek'],
           description: 'Jedna z největších multimediálních fontán v Evropě, nacházející se u Haly století. Nabízí bezplatné velkolepé světelné, vodní a hudební show.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Wroclawska+Fontanna+Multimedialna',
@@ -179,6 +213,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Japonská zahrada',
+          rating: '★ 4,6',
           tags: ['Wrocław', 'Zahrada', 'Příroda'],
           description: 'Krásná a uklidňující japonská zahrada v Szczytnickém parku, navržená japonskými zahradními architekty s kaskádami, čajovým pavilonem a pestrou flórou.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Ogrod+Japonski+Wroclaw',
@@ -186,6 +221,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Kolejkowo (ve Sky Tower)',
+          rating: '★ 4,8',
           tags: ['Wrocław', 'Modelová železnice'],
           description: 'Obrovský miniaturní svět Dolního Slezska s jezdícími vlaky, auty, tramvajemi a detailně zpracovanými scénami z běžného života v měřítku 1:25.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Kolejkowo+Wroclaw',
@@ -193,6 +229,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Vyhlídková terasa Sky Tower',
+          rating: '★ 4,5',
           tags: ['Wrocław', 'Vyhlídka'],
           description: 'Moderní vyhlídková terasa ve 49. patře mrakodrapu Sky Tower, která skýtá úžasný kruhový výhled na celou Vratislav i vzdálenou horu Sněžku.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Sky+Tower+Taras+Widokowy+Wroclaw',
@@ -200,6 +237,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Plavba parníkem nebo motorovým člunem po Odře',
+          rating: '★ 4,6',
           tags: ['Wrocław', 'Zážitek'],
           description: 'Vyhlídkové plavby po ramenech řeky Odry nabízejí jedinečné pohledy na historické budovy univerzity, staré mosty a malebná zákoutí ostrovů.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Przystan+Kardynalska+Wroclaw',
@@ -207,13 +245,15 @@ export const tripData: TripData = {
         },
         {
           title: 'Polinka (lanovka)',
+          rating: '★ 4,6',
           tags: ['Wrocław', 'Technická památka'],
-          description: 'Kabinová lanová dráha nad řekou Odrou provozovaná technickou univerzitou. Původně vznikla pro studenty, dnes slouží i jako netradiční vyhlídková atrakce.',
+          description: 'Kabinová lanová dráha nad řekou Odrou provozovaná technickou univerzitou. Původně vznikla pro studenty, dnes slouíví i jako netradiční vyhlídková atrakce.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Polinka+Wroclaw',
           webLink: 'https://www.pwr.edu.pl',
         },
         {
           title: 'Neon Side Galeria',
+          rating: '★ 4,7',
           tags: ['Wrocław', 'Kultura', 'Umění'],
           description: 'Nádvoří pod širým nebem plné barevně svítících retro neonů zachráněných z celého regionu. Místo ožívá zejména po setmění svým nezaměnitelným kouzlem.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Neon+Side+Galeria+Wroclaw',
@@ -221,6 +261,7 @@ export const tripData: TripData = {
         },
         {
           title: 'MovieGate',
+          rating: '★ 4,6',
           tags: ['Wrocław', 'Muzeum', 'Film'],
           description: 'Unikátní výstava filmových rekvizit a kostýmů z hollywoodských trháků, umístěná v autentickém historickém krytu civilní obrany pod Solným náměstím.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=MovieGate+Wroclaw',
@@ -228,6 +269,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Tržnice Hala Targowa',
+          rating: '★ 4,5',
           tags: ['Wrocław', 'Historická budova', 'Nákupy'],
           description: 'Monumentální secesní krytá tržnice s revoluční železobetonovou konstrukcí z počátku 20. století. Živé místo plné barev, vůní, květin a čerstvých potravin.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Hala+Targowa+Wroclaw',
@@ -235,6 +277,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Vyhlídková věž kostela sv. Alžběty',
+          rating: '★ 4,6',
           tags: ['Wrocław', 'Vyhlídka'],
           description: 'Gotický kostel s vyhlídkovou terasou na věži ve výšce 75 metrů. Cesta nahoru vede po točitém kamenném schodišti s více než 300 schody.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Kosciol+sw.+Elzbiety+Wieza+Widokowa+Wroclaw',
@@ -242,6 +285,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Vyhlídkový Mostek Čarodějnic',
+          rating: '★ 4,7',
           tags: ['Wrocław', 'Vyhlídka', 'Legenda'],
           description: 'Vysutý cihlový mostek, který spojuje obě věže katedrály sv. Máří Magdalény ve výšce 45 metrů, opředený řadou tajuplných legend o neposlušných dívkách.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Mostek+Pokutnic+Wroclaw',
@@ -249,6 +293,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Bastion Sakwowy',
+          rating: '★ 4,8',
           tags: ['Wrocław', 'Historická památka'],
           description: 'Nově a nádherně zrekonstruovaná pevnostní bašta na městské promenádě s elegantní novoklasicistní kolonádou, fontánou a stylovou kavárnou.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Bastion+Sakwowy+Wroclaw',
@@ -256,6 +301,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Stará jatka (Stare Jatki)',
+          rating: '★ 4,6',
           tags: ['Wrocław', 'Historická ulice'],
           description: 'Kouzelná středověká ulička s dochovanou historickou dřevěnou architekturou, dříve sloužící řezníkům. Dnes zde sídlí galerie a bronzový pomník zvířat.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Stare+Jatki+Wroclaw',
@@ -263,6 +309,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Královský palác (zahrady)',
+          rating: '★ 4,6',
           tags: ['Wrocław', 'Barokní zahrada'],
           description: 'Rezidence pruských králů, v níž dnes sídlí městské muzeum. K paláci přiléhá geometricky upravená barokní zahrada nabízející klidný azyl uprostřed města.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Palac+Krolewski+Wroclaw',
@@ -270,6 +317,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Staroměstský park',
+          rating: '★ 4,6',
           tags: ['Wrocław', 'Park'],
           description: 'Nádherně udržovaný francouzsko-anglický park v centru města s historickým litinovým kolotočem z 19. století, fontánou a dětským hřištěm.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Park+Staromiejski+Wroclaw',
@@ -277,6 +325,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Odra Centrum',
+          rating: '★ 4,7',
           tags: ['Wrocław', 'Vzdělávání', 'Zážitek'],
           description: 'Unikátní moderní plovoucí dům na řece Odře sloužící jako ekologické a komunitní centrum zaměřené na historii řeky a ochranu přírodních toků.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Odra+Centrum+Wroclaw',
@@ -284,6 +333,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Geocentrum Polské akademie věd',
+          rating: '★ 4,5',
           tags: ['Wrocław', 'Věda'],
           description: 'Moderní akademická instituce na nábřeží Odry zaměřená na geologické a ekologické vědy, zajímavá svou minimalistickou moderní architekturou.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Podwale+75+Wroclaw',
@@ -291,6 +341,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Čtvrť čtyř vyznání',
+          rating: '★ 4,6',
           tags: ['Wrocław', 'Historie', 'Kultura'],
           description: 'Kulturně významná čtvrť, kde v okruhu 300 metrů stojí chrámy čtyř různých náboženství (katolický, pravoslavný, protestantský a synagoga) jako symbol tolerance.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Synagoga+Pod+Bialym+Bocianem+Wroclaw',
@@ -298,6 +349,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Rynek a gotická Radnice',
+          rating: '★ 4,8',
           tags: ['Wrocław', 'Historické centrum'],
           description: 'Srdce Vratislavi s jedním z největších středověkých náměstí v Evropě, lemovaným barevnými patricijskými domy a ovládaným unikátní gotickou radnicí.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Ratusz+Wroclaw',
@@ -305,6 +357,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Univerzitní náměstí a budova univerzity',
+          rating: '★ 4,7',
           tags: ['Wrocław', 'Barokní památka'],
           description: 'Impozantní barokní stavba univerzity na břehu Odry s nádherným historickým sálem Aula Leopoldina a Matematickou věží sloužící jako vyhlídka.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Uniwersytet+Wroclawski',
@@ -312,6 +365,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Aquapark Wrocław',
+          rating: '★ 4,4',
           tags: ['Wrocław', 'Relaxace', 'Zábava'],
           description: 'Moderní, špičkově vybavené vodní centrum s vnitřními i venkovními bazény, divokou řekou, rozsáhlým saunovým světem a termálními lázněmi pro regeneraci.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Aquapark+Wroclaw',
@@ -333,41 +387,56 @@ export const tripData: TripData = {
       },
       recommendation: {
         title: 'Doporučení na večer v Poznani',
-        text: 'Po ubytování v Poznani vřele doporučujeme podvečerní procházku. Mezi skvělá klidná místa patří blízký Park Wilsona s palmami, park Manitiusa, špičkový moderní gastro areál City Park Poznań, nebo snové historické srdce města Starý Rynek.',
+        text: 'Po ubytování v Apartamenty na Dalekiej doporučujeme klidnou podvečerní procházku v některém z blízkých parků nebo návštěvu skvělých gastro podniků nacházejících se v docházkové vzdálenosti.',
         places: [
           {
-            title: 'Park Manitiusa',
-            tags: ['Poznań', 'Večerní doporučení', 'Park'],
-            description: 'Klidný historický městský park s pěšími stezkami a vzrostlými stromy, situovaný v blízkosti ubytování ve čtvrti Grunwald.',
-            mapLink: 'https://www.google.com/maps/search/?api=1&query=Park+Manitiusa+Poznan',
-            webLink: 'https://www.poznan.pl',
+            title: 'Restauracja Monal',
+            rating: '★ 4,7',
+            tags: ['Poznań', 'Indická kuchyně', 'Gastro'],
+            description: 'Vynikající indická restaurace nabízející autentická jídla, skvělé kari a tradiční chléb naan na ulici Głogowska 170.',
+            mapLink: 'https://www.google.com/maps/search/?api=1&query=Restauracja+Monal+Glogowska+170+Poznan',
           },
           {
-            title: 'Park Wilsona',
-            tags: ['Poznań', 'Večerní doporučení', 'Park'],
-            description: 'Nejstarší veřejný park v Poznani s krásnými historickými rybníky, secesní hudební estrádou a majestátním skleníkem s tropickou flórou.',
-            mapLink: 'https://www.google.com/maps/search/?api=1&query=Park+Wilsona+Poznan',
-            webLink: 'https://www.palmiarnia.poznan.pl',
+            title: 'Pizzeria Frontiera',
+            rating: '★ 4,8',
+            tags: ['Poznań', 'Italská kuchyně', 'Pizza'],
+            description: 'Vyhlášená pizzerie na ulici Ściegiennego 10, nabízející fantastickou autentickou neapolskou pizzu pečenou v peci na dřevo.',
+            mapLink: 'https://www.google.com/maps/search/?api=1&query=Pizzeria+Frontiera+Sciegiennego+10+Poznan',
+          },
+          {
+            title: 'Ułan Browar',
+            rating: '★ 4,5',
+            tags: ['Poznań', 'Pivovar', 'Gastro'],
+            description: 'Místní řemeslný pivovar a restaurace nacházející se v atraktivním a moderním areálu City Park na ulici Wyspiańskiego 26.',
+            mapLink: 'https://www.google.com/maps/search/?api=1&query=Ulan+Browar+Wyspianskiego+26+Poznan',
           },
           {
             title: 'City Park Poznań',
-            tags: ['Poznań', 'Večerní doporučení', 'Gastro'],
-            description: 'Prestižní, moderně zrekonstruovaný komplex původních pruských jezdeckých kasáren z 19. století, dnes vyhlášené centrum skvělé gastronomie a barů.',
+            rating: '★ 4,7',
+            tags: ['Poznań', 'Gastro', 'Relaxace'],
+            description: 'Prestižní, stylově zrekonstruovaný komplex původních pruských kasáren, který dnes slouží jako vyhlášené centrum skvělé gastronomie, kaváren a odpočinku.',
             mapLink: 'https://www.google.com/maps/search/?api=1&query=City+Park+Poznan',
-            webLink: 'https://www.cityparkpoznan.pl',
           },
           {
-            title: 'Starý Rynek (Hlavní náměstí)',
-            tags: ['Poznań', 'Večerní doporučení', 'Historické centrum'],
-            description: 'Hlavní historické náměstí Poznani s nádhernou renesanční radnicí, typickými úzkými kupeckými domky a úžasným večerním osvětlením.',
-            mapLink: 'https://www.google.com/maps/search/?api=1&query=Stary+Rynek+Poznan',
-            webLink: 'https://www.poznan.travel',
+            title: 'Park Kasprowicza a Hala Arena',
+            rating: '★ 4,5',
+            tags: ['Poznań', 'Procházka', 'Park'],
+            description: 'Krásný městský park s charakteristickou kruhovou sportovní halou Arena, pěšími chodníky a spoustou zeleně pro příjemnou a klidnou podvečerní procházku.',
+            mapLink: 'https://www.google.com/maps/search/?api=1&query=Park+Kasprowicza+Hala+Arena+Poznan',
+          },
+          {
+            title: 'Park Wilsona a Palmiarnia Poznańska',
+            rating: '★ 4,7',
+            tags: ['Poznań', 'Procházka', 'Park'],
+            description: 'Nádherný historický park s rybníčky, secesními prvky a rozsáhlým skleníkem (palmiárnou) s exotickou flórou.',
+            mapLink: 'https://www.google.com/maps/search/?api=1&query=Park+Wilsona+Palmiarnia+Poznanska+Poznan',
           },
         ]
       },
       places: [
         {
           title: 'Zámek Rydzyna',
+          rating: '★ 4,6',
           tags: ['Polsko', 'Rydzyna', 'Zámek'],
           description: 'Největší barokní palácové sídlo ve Velkopolsku ze 17. století, vybudované na základech gotického hradu, obklopené zachovalým vodním příkopem a parkem.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Zamek+Rydzyna',
@@ -375,6 +444,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Historický větrný mlýn v Rydzyně',
+          rating: '★ 4,6',
           tags: ['Polsko', 'Rydzyna', 'Technická památka'],
           description: 'Historický dřevěný větrný mlýn typu "koźlak" z 18. století, kompletně zrekonstruovaný a upravený jako malé mlynářské muzeum.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Wiatrak+Jozef+Rydzyna',
@@ -382,6 +452,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Leszno (Staré město)',
+          rating: '★ 4,5',
           tags: ['Polsko', 'Leszno', 'Historické centrum'],
           description: 'Malebné historické náměstí s impozantní barokní radnicí a zachovalými měšťanskými domy, ideální zastávka na kávu při cestě na sever.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Rynek+Leszno',
@@ -389,6 +460,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Zámek v Rokosowu',
+          rating: '★ 4,4',
           tags: ['Polsko', 'Rokosowo', 'Zámek'],
           description: 'Romantický novogotický zámek s věžičkami a cimbuřím z 19. století, postavený podle návrhu slavného pruského architekta Stülera, usazený v lesním parku.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Zamek+Rokosowo',
@@ -396,6 +468,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Národní park Wielkopolska',
+          rating: '★ 4,7',
           tags: ['Polsko', 'Mosina', 'Přírodní park'],
           description: 'Chráněné území s hlubokými borovými a dubovými lesy, malebnými ledovcovými jezery a morénovými kopci vytvořenými ledovcem.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Wielkopolski+Park+Narodowy',
@@ -403,6 +476,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Zámek Kórnik',
+          rating: '★ 4,7',
           tags: ['Polsko', 'Kórnik', 'Zámek'],
           description: 'Unikátní anglicko-novogotický zámek s vodním příkopem, slavnou historickou knihovnou a nádherným arboretem s tisíci vzácných stromů a keřů.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Zamek+Kornik',
@@ -410,6 +484,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Palác a park Rogalin',
+          rating: '★ 4,7',
           tags: ['Polsko', 'Rogalin', 'Palác'],
           description: 'Nádherná pozdně barokní rezidence rodu Raczyńských se slavnou galerií obrazů a francouzskou zahradou, v jejímž parku stojí monumentální staleté duby.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Palac+Rogalin',
@@ -417,6 +492,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Miliczské rybníky',
+          rating: '★ 4,6',
           tags: ['Polsko', 'Milicz', 'Přírodní rezervace'],
           description: 'Obrovská soustava chovných rybníků s historií od středověku. Jde o největší evropskou přírodní rezervaci pro vodní ptactvo na seznamu chráněných lokalit.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Stawy+Milickie',
@@ -424,6 +500,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Trzebnica (bazilika)',
+          rating: '★ 4,7',
           tags: ['Polsko', 'Trzebnica', 'Poutní místo'],
           description: 'Monumentální románsko-gotická bazilika s barokním klášterem ze 13. století, která slouží jako hlavní poutní místo Dolního Slezska a hrobka svaté Hedviky.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Bazylika+Trzebnica',
@@ -439,7 +516,16 @@ export const tripData: TripData = {
       },
       places: [
         {
+          title: 'Zámek Stobnica',
+          rating: '★ 4,4',
+          tags: ['Polsko', 'Stobnica', 'Zajímavost', 'Zámek'],
+          description: 'Fascinující a kontroverzní moderní replika středověkého hradu postavená na umělém ostrově uprostřed rybníka na okraji Notečského pralesa. Tato monumentální stavba vyvolává obrovský zájem i vzrušené debaty a působí jako z jiného světa.',
+          mapLink: 'https://www.google.com/maps/search/?api=1&query=Zamek+w+Stobnicy',
+          webLink: 'https://stobnica.com.pl',
+        },
+        {
           title: 'Poznaňští kozlíci (na Radnici)',
+          rating: '★ 4,7',
           tags: ['Poznań', 'Zážitek'],
           description: 'Hlavní atrakce Poznani. Každé poledne se na věži renesanční radnice otevřou dvířka a dvě plechové figurky kozlíků se dvanáctkrát trknou rohy za zvuku trubky.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Ratusz+Poznan+Koziolki',
@@ -447,20 +533,21 @@ export const tripData: TripData = {
         },
         {
           title: 'Staré náměstí and barevné kupecké domky',
+          rating: '★ 4,7',
           tags: ['Poznań', 'Historické centrum'],
           description: 'Sada malebných pestrobarevných domků s podloubím ze 16. století, v nichž dříve sídlili drobní obchodníci s rybami a solí, přiléhající těsně k Radnici.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Stary+Rynek+Kamieniczki+Budnicze',
-          webLink: 'https://www.poznan.travel',
         },
         {
           title: 'Park Citadela (vojenská technika)',
+          rating: '★ 4,8',
           tags: ['Poznań', 'Park', 'Historie'],
           description: 'Obrovský park vybudovaný na místě monumentální pruské pevnosti Winiary. V parku se nacházejí válečné památníky, hřbitovy a rozsáhlá venkovní expozice letadel, tanků a děl.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Park+Cytadela+Poznan',
-          webLink: 'https://www.poznan.pl',
         },
         {
           title: 'Císařský zámek',
+          rating: '★ 4,6',
           tags: ['Poznań', 'Historická budova'],
           description: 'Monumentální neorománský palác vystavěný na začátku 20. století pro německého císaře Viléma II. Jde o vůbec poslední dokončený císařský zámek v Evropě.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Zamek+Cesarski+Poznan',
@@ -468,6 +555,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Královský zámek (vyhlídka)',
+          rating: '★ 4,5',
           tags: ['Poznań', 'Vyhlídka'],
           description: 'Zrekonstruovaný královský zámek z 13. století tyčící se na kopci nad náměstím. Z jeho vysoké věže se nabízí nejlepší panorama celého starého města.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Zamek+Krolewski+Poznan',
@@ -475,6 +563,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Enigma Cipher Centre',
+          rating: '★ 4,7',
           tags: ['Poznań', 'Interaktivní muzeum', 'Věda'],
           description: 'Moderní zážitková expozice věnovaná dešifrování legendárního německého stroje Enigma, které jako první dokázali právě absolventi poznaňské univerzity.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Centrum+Szyfrow+Enigma+Poznan',
@@ -482,6 +571,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Porta Posnania',
+          rating: '★ 4,7',
           tags: ['Poznań', 'Muzeum', 'Architektura'],
           description: 'Oceňované interaktivní centrum historie polského státu, umístěné v moderní minimalistické betonové budově propojené mostem s historickým Ostrovem Tumským.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Brama+Poznania+ICHOT',
@@ -489,6 +579,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Palmiarnia Poznańska',
+          rating: '★ 4,7',
           tags: ['Poznań', 'Botanický skleník'],
           description: 'Jeden z největších a nejstarších palmových skleníků ve střední Evropě, s deseti pavilony tropické přírody, obřími lekníny, akvárii a exotickými plazy.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Palmiarnia+Poznanska',
@@ -496,6 +587,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Parková dráha Maltanka',
+          rating: '★ 4,7',
           tags: ['Poznań', 'Úzkorozchodná železnice'],
           description: 'Oblíbená úzkorozchodná železnice s historickými vagóny a parní lokomotivou, která vede po břehu rekreačního jezera Malta a spojuje centrum s Novou ZOO.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Kolejka+Parkowa+Maltanka',
@@ -503,6 +595,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Nová ZOO Poznaň',
+          rating: '★ 4,5',
           tags: ['Poznań', 'Zoo'],
           description: 'Rozsáhlá, lesní zoologická zahrada s velkoryse řešenými přírodními výběhy. Známá zejména svým velkým moderním pavilonem pro slony a záchranným centrem pro medvědy.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Nowe+ZOO+Poznan',
@@ -510,6 +603,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Stará ZOO Poznaň',
+          rating: '★ 4,6',
           tags: ['Poznań', 'Zoo & Park'],
           description: 'Historická zoologická zahrada z roku 1874 v centru města, dnes sloužící jako krásný, volně přístupný park s historickými klecemi a chovným pavilonem plazů.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Stare+ZOO+Poznan',
@@ -517,6 +611,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Kontenery Nad Wartą',
+          rating: '★ 4,6',
           tags: ['Poznań', 'Zábava', 'Kultura'],
           description: 'Trendy letní chilloutová zóna s písečnou pláží na břehu řeky Warty, postavená z lodních kontejnerů. Nabízí workshopy, koncerty, lehátka a bary.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=KontenerART+Poznan',
@@ -524,6 +619,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Výstaviště Poznań (MTP)',
+          rating: '★ 4,5',
           tags: ['Poznań', 'Architektura'],
           description: 'Areál mezinárodních veletrhů s úctyhodnou historií sahající do roku 1921. Komplex nabízí zajímavé architektonické pavilony v čele s věží Iglica.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Miedzynarodowe+Targi+Poznanskie',
@@ -531,13 +627,14 @@ export const tripData: TripData = {
         },
         {
           title: 'Park Sołacki',
+          rating: '★ 4,8',
           tags: ['Poznań', 'Park', 'Příroda'],
           description: 'Jeden z nejkrásnějších romantických parků v Poznani, navržený v anglickém krajinném stylu s malebnými jezírky, dřevěnými mosty a vzácnými stromy.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Park+Solacki+Poznan',
-          webLink: 'https://www.poznan.pl',
         },
         {
           title: 'Rezerwat Archeologiczny Genius Loci',
+          rating: '★ 4,6',
           tags: ['Poznań', 'Archeologické naleziště'],
           description: 'Moderní expozice chránící výborně dochované obří dřevohlinité obranné valy hradiště z 10. století, které dokumentují zrod polské státnosti na Ostrově Tumském.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Rezerwat+Archeologiczny+Genius+Loci',
@@ -545,6 +642,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Termy Maltańskie',
+          rating: '★ 4,5',
           tags: ['Poznań', 'Aquapark', 'Relaxace'],
           description: 'Největší a nejmodernější vodní areál v Polsku ležící u jezera Malta. Nabízí sportovní bazény, velký aquapark s divokou vodou, termální prameny a saunový svět.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Termy+Maltanskie',
@@ -552,20 +650,21 @@ export const tripData: TripData = {
         },
         {
           title: 'Vyhlídkové kolo (Poznań Eye)',
+          rating: '★ 4,6',
           tags: ['Poznań', 'Vyhlídka', 'Zábava'],
           description: 'Obří ruské vyhlídkové kolo tyčící se na nábřeží rekreačního jezera Malta, poskytující panoramatický výhled na celou vodní plochu a centrum Poznani.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Diabelski+Mlyn+Malta+Poznan',
-          webLink: 'https://www.poznan.travel',
         },
         {
           title: 'Jeżyce (secesní čtvrť)',
+          rating: '★ 4,6',
           tags: ['Poznań', 'Historická čtvrť', 'Atmosféra'],
           description: 'Charismatická historická čtvrť známá svými secesními činžovními domy s bohatým zdobením, hipsterskými bistry a tradičním trhem Rynek Jeżycki.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Rynek+Jezycki+Poznan',
-          webLink: 'https://www.poznan.travel',
         },
         {
           title: 'Fort VII (Pevnost VII)',
+          rating: '★ 4,7',
           tags: ['Poznań', 'Vojenská pevnost', 'Historie'],
           description: 'Historická dělostřelecká pevnost, která byla nacisty přeměněna na první koncentrační tábor v Polsku. Dnes slouží jako pietní muzeum a památník obětí.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Fort+VII+Poznan',
@@ -573,6 +672,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Fort III (Pevnost III)',
+          rating: '★ 4,7',
           tags: ['Poznań', 'Vojenská pevnost', 'Historie'],
           description: 'Jedna z nejlépe dochovaných hlavních pevností pruského opevnění z konce 19. století, nacházející se uvnitř areálu Nové ZOO. Přístupná s průvodcem.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Fort+III+Poznan',
@@ -580,6 +680,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Muzeum zbraní (Citadela)',
+          rating: '★ 4,7',
           tags: ['Poznań', 'Vojenské muzeum'],
           description: 'Pobočka vojenského muzea umístěná v pozůstatcích dělostřeleckých skladů na Citadele. Nabízí unikátní exponáty palných zbraní, výstroje a venkovní tanky a letadla.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Muzeum+Uzbrojenia+Poznan',
@@ -587,6 +688,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Muzeum armády Poznaň (Citadela)',
+          rating: '★ 4,6',
           tags: ['Poznań', 'Vojenské muzeum'],
           description: 'Výstava mapující historii bojů o Poznaň v roce 1945 a historii vojenské posádky, situovaná v zachovalých chodbách vojenské pevnosti.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Muzeum+Armii+Poznan',
@@ -594,6 +696,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Schron Atomowy Prezydenta Poznania',
+          rating: '★ 4,6',
           tags: ['Poznań', 'Protiatomový kryt'],
           description: 'Plně funkční a skrytý podzemní protiatomový kryt z dob studené války, postavený pro primátora města a krizové štáby, dochovaný s kompletním technickým vybavením.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Schron+Prezydenta+Poznania',
@@ -609,14 +712,23 @@ export const tripData: TripData = {
       },
       places: [
         {
+          title: 'Zámek Stobnica',
+          rating: '★ 4,4',
+          tags: ['Polsko', 'Stobnica', 'Zajímavost', 'Zámek'],
+          description: 'Fascinující a kontroverzní moderní replika středověkého hradu postavená na umělém ostrově uprostřed rybníka na okraji Notečského pralesa. Tato monumentální stavba vyvolává obrovský zájem i vzrušené debaty a působí jako z jiného světa.',
+          mapLink: 'https://www.google.com/maps/search/?api=1&query=Zamek+w+Stobnicy',
+          webLink: 'https://stobnica.com.pl',
+        },
+        {
           title: 'Świebodzin (Socha Krista Krále)',
+          rating: '★ 4,7',
           tags: ['Polsko', 'Świebodzin', 'Zajímavost'],
           description: 'Monumentální železobetonová socha Ježíše Krista s pozlacenou korunou, měřící 36 metrů (převyšuje slavnou sochu v Riu). Skvělá krátká zastávka u trasy.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Pomnik+Chrystusa+Krola+Swiebodzin',
-          webLink: 'https://www.swiebodzin.pl',
         },
         {
           title: 'Pevnostní region Obra-Warta (MRU)',
+          rating: '★ 4,8',
           tags: ['Polsko', 'Międzyrzecz', 'Vojenská pevnost'],
           description: 'Fascinující kilometry dlouhý německý podzemní opevňovací systém z druhé světové války se skrytými kopulemi a tunely. Dnes slouží jako největší evropské zimoviště netopýrů.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Miedzyrzecki+Rejon+Uproczony+MRU',
@@ -624,6 +736,7 @@ export const tripData: TripData = {
         },
         {
           title: 'Muzeum vojenské techniky v Drzonówě',
+          rating: '★ 4,7',
           tags: ['Polsko', 'Drzonów', 'Vojenské muzeum'],
           description: 'Lubuské vojenské muzeum s úctyhodnou expozicí těžkých bojových letadel, helikoptér, tanků a děl v areálu historického klasicistního paláce.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Lubuskie+Muzeum+Wojskowe+Drzonow',
@@ -631,10 +744,19 @@ export const tripData: TripData = {
         },
         {
           title: 'Geopark Babiště (Łuk Mużakowa)',
+          rating: '★ 4,8',
           tags: ['Polsko', 'Łęknica', 'Přírodní památka'],
           description: 'Nádherná barevná zatopená jezírka vzniklá po historické hlubinné těžbě, tvořící geologický útvar ve tvaru podkovy na hranici s Německem pod ochranou UNESCO.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Geopark+Luk+Muzakowa',
           webLink: 'https://www.lukmuzakowa.pl',
+        },
+        {
+          title: 'Zámek Moritzburg',
+          rating: '★ 4,7',
+          tags: ['Německo', 'Moritzburg', 'Zámek', 'Filmová místa'],
+          description: 'Nádherný barokní zámek tyčící se na ostrově uprostřed jezera nedaleko Drážďan. Je světoznámý zejména jako hlavní místo natáčení legendární české pohádky "Tři oříšky pro Popelku". Úžasná a nostalgická zastávka na procházku kolem vody na cestě domů.',
+          mapLink: 'https://www.google.com/maps/search/?api=1&query=Schloss+Moritzburg',
+          webLink: 'https://www.schloss-moritzburg.de',
         },
       ],
     },

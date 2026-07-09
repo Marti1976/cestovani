@@ -23,7 +23,13 @@ const ItinerarySection: React.FC<ItinerarySectionProps> = ({ data, visitedPlaces
       </div>
 
       {data.travelInfo && <TravelInfoCard travelInfo={data.travelInfo} />}
-      {data.accommodation && <AccommodationCard accommodation={data.accommodation} />}
+      {data.accommodation && (
+        <AccommodationCard 
+          accommodation={data.accommodation} 
+          isVisited={visitedPlaces.has(data.accommodation.name)}
+          onToggleVisited={() => onToggleVisited(data.accommodation.name)}
+        />
+      )}
       {data.recommendation && (
         <RecommendationCard 
           recommendation={data.recommendation} 

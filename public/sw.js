@@ -1,9 +1,9 @@
 
-const CACHE_NAME = 'SLOVAKIAv10';
+const CACHE_NAME = 'POLANDv8';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
-  './manifest.json?v=10',
+  './manifest.json?v=8',
   './icons/icons16.png',
   './icons/icons32.png',
   './icons/icons64.png',

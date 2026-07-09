@@ -1,13 +1,15 @@
 
 import React from 'react';
 import { Accommodation } from './types';
-import { IconBed, IconMapPin, IconWaze, IconBooking } from './Icons';
+import { IconBed, IconMapPin, IconWaze, IconBooking, IconCalendar, IconCheck } from './Icons';
 
 interface AccommodationCardProps {
   accommodation: Accommodation;
+  isVisited?: boolean;
+  onToggleVisited?: () => void;
 }
 
-export const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation }) => {
+export const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, isVisited, onToggleVisited }) => {
   const getWazeLink = (mapLink: string) => {
     if (!mapLink) return null;
     try {
@@ -24,9 +26,33 @@ export const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodat
   };
   
   const wazeLink = getWazeLink(accommodation.mapLink);
+
+  const handleAddToCalendar = () => {
+    const baseUrl = 'https://www.google.com/calendar/render?action=TEMPLATE';
+    const title = encodeURIComponent(`Ubytování: ${accommodation.name}`);
+    const details = encodeURIComponent(`Adresa: ${accommodation.address}\n\nOdkaz: ${accommodation.bookingLink || ''}`);
+    let location = encodeURIComponent(accommodation.address);
+
+    if (accommodation.mapLink) {
+      if (accommodation.mapLink.startsWith('https://www.google.com/maps/search/')) {
+        try {
+          const url = new URL(accommodation.mapLink);
+          const query = url.searchParams.get('query');
+          if (query) {
+            location = encodeURIComponent(query);
+          }
+        } catch (e) {
+          console.error("Could not parse Google Maps URL, falling back to address.", e);
+        }
+      }
+    }
+
+    const calendarUrl = `${baseUrl}&text=${title}&details=${details}&location=${location}`;
+    window.open(calendarUrl, '_blank');
+  };
   
   return (
-    <div className="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-400 dark:border-yellow-500 rounded-r-lg p-5 mb-6 shadow-sm">
+    <div className={`bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-400 dark:border-yellow-500 rounded-r-lg p-5 mb-6 shadow-sm transition-all duration-300 ${isVisited ? 'opacity-50 grayscale' : ''}`}>
       <h3 className="flex items-center gap-3 text-lg font-semibold text-yellow-800 dark:text-yellow-300 mb-2">
         <IconBed />
         Ubytování
@@ -49,6 +75,20 @@ export const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodat
             <IconBooking />
             Booking
           </a>
+        )}
+      </div>
+      <div className="border-t border-slate-200 dark:border-slate-700 mt-4 pt-3 flex justify-between items-center">
+        <button onClick={handleAddToCalendar} className="flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm font-medium">
+           <IconCalendar />
+           Přidat do kalendáře
+        </button>
+        {onToggleVisited && (
+          <button onClick={onToggleVisited} className="flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-green-600 dark:hover:text-green-400 transition-colors text-sm font-medium" aria-label="Označit jako ubytované">
+            <div className={`w-5 h-5 border-2 rounded ${isVisited ? 'bg-green-500 border-green-500' : 'border-slate-400'} flex items-center justify-center`}>
+              {isVisited && <IconCheck />}
+            </div>
+            Ubytováno
+          </button>
         )}
       </div>
     </div>
