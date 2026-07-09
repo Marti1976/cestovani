@@ -86,9 +86,7 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place, isVisited, onToggleVisited
   const wazeLink = getWazeLink();
   
   const buttonCount = [place.mapLink, wazeLink, place.webLink].filter(Boolean).length;
-  const buttonSizeClass = buttonCount === 3 
-    ? 'text-xs py-2 px-3 gap-1.5' // Compact for 3 buttons
-    : 'text-sm py-2 px-4 gap-2';  // Standard for 1 or 2
+  const buttonSizeClass = 'text-sm py-2 px-3 gap-1.5 sm:gap-2 min-w-[90px]';
 
 
   return (
@@ -123,7 +121,7 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place, isVisited, onToggleVisited
           <IconSparkles />
           AI Průvodce
         </button>
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-2">
             {place.mapLink && (
               <a href={place.mapLink} target="_blank" rel="noopener noreferrer" className={`flex-1 flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors duration-200 ${buttonSizeClass}`}>
                 <IconMapPin />

@@ -33,19 +33,19 @@ export const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodat
       </h3>
       <p className="font-bold text-slate-800 dark:text-slate-100">{accommodation.name}</p>
       <p className="text-slate-600 dark:text-slate-300">{accommodation.address}</p>
-      <div className="flex gap-3 mt-3">
-        <a href={accommodation.mapLink} target="_blank" rel="noopener noreferrer" className="flex-1 inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg text-sm transition-colors">
+      <div className="flex flex-wrap gap-2 mt-3">
+        <a href={accommodation.mapLink} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[90px] inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-3 rounded-lg text-sm transition-colors">
           <IconMapPin />
           Mapa
         </a>
         {wazeLink && (
-           <a href={wazeLink} target="_blank" rel="noopener noreferrer" className="flex-1 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg text-sm transition-colors">
+           <a href={wazeLink} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[90px] inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-3 rounded-lg text-sm transition-colors">
             <IconWaze />
             Waze
           </a>
         )}
         {accommodation.bookingLink && (
-           <a href={accommodation.bookingLink} target="_blank" rel="noopener noreferrer" className="flex-1 inline-flex items-center justify-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded-lg text-sm transition-colors">
+           <a href={accommodation.bookingLink} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[90px] inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-3 rounded-lg text-sm transition-colors">
             <IconBooking />
             Booking
           </a>
