@@ -89,8 +89,28 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place, isVisited, onToggleVisited
   const buttonSizeClass = 'text-sm py-2 px-3 gap-1.5 sm:gap-2 min-w-[90px]';
 
 
+  if (isVisited) {
+    return (
+      <div className="bg-slate-100 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/60 rounded-xl p-3 flex items-center justify-between shadow-sm opacity-60 hover:opacity-100 transition-all duration-300">
+        <span className="text-sm font-semibold text-slate-500 dark:text-slate-400 line-through truncate pr-2">
+          {place.title}
+        </span>
+        <button 
+          onClick={onToggleVisited} 
+          className="flex items-center gap-2 text-green-600 dark:text-green-400 font-semibold text-xs shrink-0 cursor-pointer"
+          aria-label="Označit jako nenavštívené"
+        >
+          <div className="w-5 h-5 border-2 rounded bg-green-500 border-green-500 flex items-center justify-center">
+            <IconCheck />
+          </div>
+          <span>Navštíveno</span>
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <div className={`bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-700 rounded-xl p-5 flex flex-col justify-between shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-300 ${isVisited ? 'opacity-50 grayscale' : ''}`}>
+    <div className="bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-700 rounded-xl p-5 flex flex-col justify-between shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
       <div>
         <div className="flex justify-between items-start gap-4 mb-3">
           <h3 className="text-lg font-bold text-blue-800 dark:text-blue-300 pr-2">{place.title}</h3>

@@ -6,6 +6,7 @@ import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import LoginOverlay from './components/LoginOverlay';
 import UsefulLinks from './components/UsefulLinks';
+import { DaySelector } from './components/DaySelector';
 
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('isAuthenticated') === 'true');
@@ -144,9 +145,11 @@ const App: React.FC = () => {
       <Header title={tripData.title} dates={tripData.dates} versionIdentifier={APP_VERSION_IDENTIFIER} />
       <main className="container mx-auto px-4 py-8">
         <UsefulLinks links={usefulLinks} onLinksChange={setUsefulLinks} />
+        <DaySelector itinerary={tripData.itinerary} />
         {tripData.itinerary.map((day, index) => (
           <ItinerarySection 
             key={index} 
+            id={`day-section-${index}`}
             data={day} 
             visitedPlaces={visitedPlaces}
             onToggleVisited={toggleVisited}

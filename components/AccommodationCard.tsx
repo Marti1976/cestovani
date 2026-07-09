@@ -51,8 +51,33 @@ export const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodat
     window.open(calendarUrl, '_blank');
   };
   
+  if (isVisited) {
+    return (
+      <div className="bg-yellow-50/40 dark:bg-yellow-950/20 border-l-4 border-yellow-400 dark:border-yellow-500 rounded-r-lg p-3 mb-6 flex items-center justify-between shadow-sm opacity-60 hover:opacity-100 transition-all duration-300">
+        <div className="flex items-center gap-2 truncate pr-2">
+          <IconBed />
+          <span className="text-sm font-semibold text-slate-500 dark:text-slate-400 line-through truncate">
+            Ubytování: {accommodation.name}
+          </span>
+        </div>
+        {onToggleVisited && (
+          <button 
+            onClick={onToggleVisited} 
+            className="flex items-center gap-2 text-green-600 dark:text-green-400 font-semibold text-xs shrink-0 cursor-pointer"
+            aria-label="Označit jako neubytované"
+          >
+            <div className="w-5 h-5 border-2 rounded bg-green-500 border-green-500 flex items-center justify-center">
+              <IconCheck />
+            </div>
+            <span>Ubytováno</span>
+          </button>
+        )}
+      </div>
+    );
+  }
+
   return (
-    <div className={`bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-400 dark:border-yellow-500 rounded-r-lg p-5 mb-6 shadow-sm transition-all duration-300 ${isVisited ? 'opacity-50 grayscale' : ''}`}>
+    <div className="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-400 dark:border-yellow-500 rounded-r-lg p-5 mb-6 shadow-sm transition-all duration-300">
       <h3 className="flex items-center gap-3 text-lg font-semibold text-yellow-800 dark:text-yellow-300 mb-2">
         <IconBed />
         Ubytování

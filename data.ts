@@ -1,7 +1,7 @@
 import { TripData } from './components/types';
 
 export const tripData: TripData = {
-  versionIdentifier: '2026-poland-v8',
+  versionIdentifier: '2026-poland-v9',
   title: 'Cestovní plán 2026 – Polsko',
   dates: '18. – 24. července',
   usefulLinks: [

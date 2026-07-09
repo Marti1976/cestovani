@@ -7,15 +7,16 @@ import { AccommodationCard } from './AccommodationCard';
 import { IconFlagCheckered } from './Icons';
 
 interface ItinerarySectionProps {
+  id?: string;
   data: ItineraryDay;
   visitedPlaces: Set<string>;
   onToggleVisited: (placeTitle: string) => void;
 }
 
-const ItinerarySection: React.FC<ItinerarySectionProps> = ({ data, visitedPlaces, onToggleVisited }) => {
+const ItinerarySection: React.FC<ItinerarySectionProps> = ({ id, data, visitedPlaces, onToggleVisited }) => {
   
   return (
-    <section className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg p-6 md:p-8 mb-10">
+    <section id={id} className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg p-6 md:p-8 mb-10 scroll-mt-6">
       <div className="flex flex-wrap justify-between items-center gap-4 mb-6 pb-3 border-b-4 border-blue-500">
         <h2 className="text-2xl md:text-3xl font-bold text-blue-700 dark:text-blue-400">
           {data.sectionTitle}
