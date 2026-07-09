@@ -18,6 +18,7 @@ export interface Recommendation {
   title: string;
   text: string;
   mapLink?: string;
+  places?: Place[];
 }
 
 export interface TravelInfo {
@@ -36,6 +37,7 @@ export interface UsefulLink {
 export interface ItineraryDay {
   sectionTitle: string;
   travelInfo?: TravelInfo;
+  accommodation?: Accommodation;
   recommendation?: Recommendation;
   places: Place[];
   isFinalDay?: boolean;

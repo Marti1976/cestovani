@@ -3,6 +3,7 @@ import { ItineraryDay } from './types';
 import PlaceCard from './PlaceCard';
 import { RecommendationCard } from './RecommendationCard';
 import { TravelInfoCard } from './TravelInfoCard';
+import { AccommodationCard } from './AccommodationCard';
 import { IconFlagCheckered } from './Icons';
 
 interface ItinerarySectionProps {
@@ -22,7 +23,14 @@ const ItinerarySection: React.FC<ItinerarySectionProps> = ({ data, visitedPlaces
       </div>
 
       {data.travelInfo && <TravelInfoCard travelInfo={data.travelInfo} />}
-      {data.recommendation && <RecommendationCard recommendation={data.recommendation} />}
+      {data.accommodation && <AccommodationCard accommodation={data.accommodation} />}
+      {data.recommendation && (
+        <RecommendationCard 
+          recommendation={data.recommendation} 
+          visitedPlaces={visitedPlaces}
+          onToggleVisited={onToggleVisited}
+        />
+      )}
 
       {data.isFinalDay && (
         <div className="text-center py-8 text-blue-500 dark:text-blue-400">

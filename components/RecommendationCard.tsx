@@ -2,12 +2,15 @@
 import React from 'react';
 import { Recommendation } from './types';
 import { IconLightbulb, IconMapPin } from './Icons';
+import PlaceCard from './PlaceCard';
 
 interface RecommendationCardProps {
   recommendation: Recommendation;
+  visitedPlaces?: Set<string>;
+  onToggleVisited?: (placeTitle: string) => void;
 }
 
-export const RecommendationCard: React.FC<RecommendationCardProps> = ({ recommendation }) => (
+export const RecommendationCard: React.FC<RecommendationCardProps> = ({ recommendation, visitedPlaces, onToggleVisited }) => (
   <div className="bg-sky-50 dark:bg-sky-900/20 border-l-4 border-sky-400 dark:border-sky-500 rounded-r-lg p-5 mb-6 shadow-sm">
     <h4 className="flex items-center gap-3 text-lg font-semibold text-sky-800 dark:text-sky-300 mb-2">
       <IconLightbulb />
@@ -23,6 +26,19 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({ recommen
           <IconMapPin />
           Mapa
         </a>
+      </div>
+    )}
+    
+    {recommendation.places && recommendation.places.length > 0 && (
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mt-6">
+        {recommendation.places.map((place, index) => (
+          <PlaceCard 
+            key={index} 
+            place={place} 
+            isVisited={visitedPlaces?.has(place.title)}
+            onToggleVisited={onToggleVisited ? () => onToggleVisited(place.title) : undefined}
+          />
+        ))}
       </div>
     )}
   </div>
