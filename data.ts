@@ -38,10 +38,10 @@ export const tripData: TripData = {
   ],
   itinerary: [
     {
-      sectionTitle: 'Den 1 (18.7.): Cesta do Polska',
+      sectionTitle: 'Den 1 (18.7.): Cesta do Polska (z Tišnova)',
       travelInfo: {
         title: 'Přejezd do Vratislavi',
-        description: 'Cesta do Vratislavi a ubytování.',
+        description: 'Cesta do Vratislavi a ubytování. Start cesty z Tišnova.',
       },
       accommodation: {
         name: 'GAJA apartments',
