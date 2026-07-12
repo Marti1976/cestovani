@@ -3,16 +3,11 @@ import { ItineraryDay } from './types';
 
 interface DaySelectorProps {
   itinerary: ItineraryDay[];
+  collapsedDays: Set<number>;
+  onDaySelect: (index: number) => void;
 }
 
-export const DaySelector: React.FC<DaySelectorProps> = ({ itinerary }) => {
-  const handleScroll = (index: number) => {
-    const el = document.getElementById(`day-section-${index}`);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
-
+export const DaySelector: React.FC<DaySelectorProps> = ({ itinerary, collapsedDays, onDaySelect }) => {
   return (
     <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-5 mb-8 shadow-md">
       <h3 className="text-xl font-bold text-blue-800 dark:text-blue-400 mb-4 flex items-center gap-2">
@@ -27,18 +22,31 @@ export const DaySelector: React.FC<DaySelectorProps> = ({ itinerary }) => {
           const parts = day.sectionTitle.split(':');
           const dayLabel = parts[0]?.trim() || `Den ${index + 1}`;
           const dayDesc = parts.slice(1).join(':')?.trim() || '';
+          const isCollapsed = collapsedDays.has(index);
 
           return (
             <button
               key={index}
-              onClick={() => handleScroll(index)}
-              className="flex flex-col text-left p-3 rounded-xl border border-blue-100 dark:border-slate-700 bg-blue-50/30 dark:bg-slate-800/40 hover:bg-blue-100/60 dark:hover:bg-slate-700/80 hover:border-blue-300 dark:hover:border-slate-600 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
-              aria-label={`Přejít na ${dayLabel}: ${dayDesc}`}
+              onClick={() => onDaySelect(index)}
+              className={`flex flex-col text-left p-3 rounded-xl border transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                isCollapsed
+                  ? 'opacity-40 grayscale saturate-50 bg-slate-50 dark:bg-slate-800/10 border-slate-200 dark:border-slate-800/60 text-slate-400 dark:text-slate-500 hover:opacity-70 hover:scale-[1.01]'
+                  : 'border-blue-100 dark:border-slate-700 bg-blue-50/30 dark:bg-slate-800/40 hover:bg-blue-100/60 dark:hover:bg-slate-700/80 hover:border-blue-300 dark:hover:border-slate-600 hover:scale-[1.02] active:scale-[0.98]'
+              }`}
+              aria-label={`Přejít na ${dayLabel}: ${dayDesc}${isCollapsed ? ' (sbaleno)' : ''}`}
             >
-              <span className="font-bold text-blue-700 dark:text-blue-400 text-sm whitespace-nowrap mb-0.5">
-                {dayLabel}
+              <span className={`font-bold text-sm whitespace-nowrap mb-0.5 ${
+                isCollapsed
+                  ? 'text-slate-400 dark:text-slate-500 line-through'
+                  : 'text-blue-700 dark:text-blue-400'
+              }`}>
+                {dayLabel} {isCollapsed && <span className="text-[10px] font-normal italic">(skryto)</span>}
               </span>
-              <span className="text-xs text-slate-600 dark:text-slate-300 font-medium truncate w-full">
+              <span className={`text-xs font-medium truncate w-full ${
+                isCollapsed
+                  ? 'text-slate-400/80 dark:text-slate-500/80 line-through'
+                  : 'text-slate-600 dark:text-slate-300'
+              }`}>
                 {dayDesc}
               </span>
             </button>

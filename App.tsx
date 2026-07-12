@@ -24,6 +24,16 @@ const App: React.FC = () => {
     }
   });
 
+  const [collapsedDays, setCollapsedDays] = useState<Set<number>>(() => {
+    try {
+      const item = window.localStorage.getItem('collapsedDays');
+      return item ? new Set(JSON.parse(item)) : new Set();
+    } catch (error) {
+      console.error("Could not parse collapsed days from localStorage", error);
+      return new Set();
+    }
+  });
+
   const [usefulLinks, setUsefulLinks] = useState<UsefulLink[]>(() => {
     try {
       const item = window.localStorage.getItem('usefulLinks');
@@ -53,7 +63,9 @@ const App: React.FC = () => {
         console.log(`New trip detected ('${newTripId}' vs '${oldTripId}'). Clearing all user data.`);
         window.localStorage.removeItem('visitedPlaces');
         window.localStorage.removeItem('usefulLinks');
+        window.localStorage.removeItem('collapsedDays');
         setVisitedPlaces(new Set());
+        setCollapsedDays(new Set());
         setUsefulLinks(tripData.usefulLinks);
       } else {
         console.log("Same trip, minor version update. Merging useful links and preserving user data.");
@@ -118,6 +130,14 @@ const App: React.FC = () => {
     }
   }, [usefulLinks]);
 
+  useEffect(() => {
+    try {
+      window.localStorage.setItem('collapsedDays', JSON.stringify(Array.from(collapsedDays)));
+    } catch (error) {
+      console.error("Could not save collapsed days to localStorage", error);
+    }
+  }, [collapsedDays]);
+
 
   const handleLoginSuccess = () => {
     localStorage.setItem('isAuthenticated', 'true');
@@ -136,6 +156,34 @@ const App: React.FC = () => {
     });
   };
 
+  const toggleCollapsedDay = (index: number) => {
+    setCollapsedDays(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(index)) {
+        newSet.delete(index);
+      } else {
+        newSet.add(index);
+      }
+      return newSet;
+    });
+  };
+
+  const handleDaySelect = (index: number) => {
+    if (collapsedDays.has(index)) {
+      setCollapsedDays(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(index);
+        return newSet;
+      });
+    }
+    setTimeout(() => {
+      const el = document.getElementById(`day-section-${index}`);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 50);
+  };
+
   if (!isAuthenticated) {
     return <LoginOverlay onSuccess={handleLoginSuccess} />;
   }
@@ -145,7 +193,11 @@ const App: React.FC = () => {
       <Header title={tripData.title} dates={tripData.dates} versionIdentifier={APP_VERSION_IDENTIFIER} />
       <main className="container mx-auto px-4 py-8">
         <UsefulLinks links={usefulLinks} onLinksChange={setUsefulLinks} />
-        <DaySelector itinerary={tripData.itinerary} />
+        <DaySelector 
+          itinerary={tripData.itinerary} 
+          collapsedDays={collapsedDays}
+          onDaySelect={handleDaySelect}
+        />
         {tripData.itinerary.map((day, index) => (
           <ItinerarySection 
             key={index} 
@@ -153,6 +205,8 @@ const App: React.FC = () => {
             data={day} 
             visitedPlaces={visitedPlaces}
             onToggleVisited={toggleVisited}
+            isCollapsed={collapsedDays.has(index)}
+            onToggleCollapse={() => toggleCollapsedDay(index)}
           />
         ))}
       </main>
