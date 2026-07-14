@@ -1,9 +1,10 @@
 import { TripData } from './components/types';
 
 export const tripData: TripData = {
-  versionIdentifier: '2026-poland-v10',
+  versionIdentifier: '2026-poland-v13',
   title: 'Cestovní plán 2026 – Polsko',
   dates: '18. – 24. července',
+  googleMyMapsLink: 'https://www.google.com/maps/d/viewer?mid=1Xbnz4A_nFsCWiBj47rEkc82W2EXZKCo&ll=51.647592619676026%2C17.445007398437518&z=8',
   usefulLinks: [
     {
       id: 1,
@@ -34,6 +35,23 @@ export const tripData: TripData = {
       id: 6,
       title: 'Počasí v Polsku (Meteo.pl)',
       url: 'https://www.meteo.pl',
+    },
+  ],
+  documents: [
+    {
+      id: 1,
+      title: 'Polština slovníček',
+      url: './data/Polstina_slovnicek.html',
+    },
+    {
+      id: 2,
+      title: 'MHD Poznań',
+      url: './data/MHD_Poznan.html',
+    },
+    {
+      id: 3,
+      title: 'MHD Wrocław',
+      url: './data/MHD_Wroclaw.html',
     },
   ],
   itinerary: [
@@ -153,14 +171,6 @@ export const tripData: TripData = {
           description: 'Nádherná historická botanická zahrada, která proslula svými gigantickými sbírkami rododendronů, azalek a denivek. Místo plné barev a klidu.',
           mapLink: 'https://www.google.com/maps/search/?api=1&query=Arboretum+Wojslawice',
           webLink: 'https://www.arboretumwojslawice.pl',
-        },
-        {
-          title: 'Zámek a park Oleśnica',
-          rating: '★ 4,4',
-          tags: ['Polsko', 'Zámek', 'cca 30km'],
-          description: 'Významné renesanční sídlo olešnických knížat s dochovaným gotickým opevněním, jedinečnou renesanční architekturou a malebným zámeckým parkem.',
-          mapLink: 'https://www.google.com/maps/search/?api=1&query=Zamek+Ksiazece+Olesnica',
-          webLink: 'https://www.zamekkrolewski.olesnica.pl',
         },
         {
           title: 'Zámek a park v Krobielowicích',

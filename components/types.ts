@@ -43,10 +43,18 @@ export interface ItineraryDay {
   isFinalDay?: boolean;
 }
 
+export interface DocumentLink {
+  id: number;
+  title: string;
+  url: string;
+}
+
 export interface TripData {
   versionIdentifier: string;
   title: string;
   dates: string;
+  googleMyMapsLink?: string;
   itinerary: ItineraryDay[];
   usefulLinks: UsefulLink[];
+  documents: DocumentLink[];
 }

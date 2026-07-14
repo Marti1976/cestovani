@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MHD Poznań — jízdenky a doprava</title>
+<style>
+:root{
+  --bg:#faf8f4; --card:#ffffff; --navy:#16233f; --navy-2:#24365c;
+  --red:#c8102e; --red-light:#fdecef; --grey:#6b6f76; --grey-light:#eeece5;
+  --border:#e6e3db; --green:#1f7a4d; --green-light:#eaf5ef;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--bg); color:var(--navy);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.5;
+}
+.wrap{max-width:760px;margin:0 auto;padding:0 0 40px;}
+.hero{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 100%);
+  color:#fff; padding:36px 24px 28px; position:relative;
+}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:var(--red);}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin:0 0 8px;}
+.hero-eyebrow{font-size:12.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9fb0d6;margin:0;}
+.back-btn{
+  display:inline-flex;align-items:center;gap:6px;flex-shrink:0;
+  background:rgba(255,255,255,0.12);color:#fff;text-decoration:none;
+  font-size:12.5px;font-weight:700;padding:7px 14px;border-radius:20px;
+  border:1px solid rgba(255,255,255,0.28);white-space:nowrap;
+}
+.back-btn:hover{background:rgba(255,255,255,0.22);}
+.hero h1{font-size:28px;font-weight:800;margin:0 0 8px;letter-spacing:-0.01em;}
+.hero p{font-size:14px;color:#c7cee0;margin:0;max-width:52ch;}
+.section{padding:22px 24px 0;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:16px;}
+.card h2{font-size:16px;margin:0 0 12px;color:var(--navy);}
+.card h3{font-size:13.5px;margin:16px 0 8px;color:var(--navy);}
+.card h3:first-of-type{margin-top:0;}
+.highlight{
+  background:var(--red);color:#fff;border-radius:14px;padding:20px 22px;margin:-14px 24px 20px;
+  position:relative; z-index:2; box-shadow:0 8px 24px rgba(200,16,46,0.25);
+}
+.highlight .tag{font-size:11px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:#ffd7dd;margin:0 0 6px;}
+.highlight .big{font-size:22px;font-weight:800;margin:0 0 6px;}
+.highlight p{margin:0;font-size:13.5px;color:#ffe3e7;line-height:1.55;}
+.highlight .price{font-weight:800;color:#fff;}
+table{width:100%;border-collapse:collapse;font-size:13.5px;}
+th{
+  background:var(--navy);color:#fff;text-align:left;font-size:11.5px;
+  text-transform:uppercase;letter-spacing:0.03em;padding:8px 10px;
+}
+td{padding:8px 10px;border-top:1px solid var(--border);}
+tr:nth-child(even) td{background:#fbfaf7;}
+td.price{font-weight:700;color:var(--navy-2);white-space:nowrap;}
+td.dim{color:var(--grey);}
+.badge{
+  display:inline-block;background:var(--red-light);color:var(--red);font-size:10.5px;font-weight:800;
+  padding:2px 8px;border-radius:20px;margin-left:6px;vertical-align:middle;
+}
+ul.tick{list-style:none;margin:0;padding:0;}
+ul.tick li{position:relative;padding:6px 0 6px 22px;font-size:13.5px;}
+ul.tick li::before{content:"•";position:absolute;left:4px;color:var(--red);font-weight:900;}
+.tipbox{background:var(--green-light);border:1px solid var(--green);border-radius:12px;padding:14px 16px;margin-top:10px;}
+.tipbox .t{font-weight:800;color:var(--green);font-size:13px;margin:0 0 6px;}
+.tipbox p, .tipbox li{font-size:13px;color:#204d36;}
+.linklist{margin:0;padding:0;list-style:none;}
+.linklist li{padding:6px 0;border-top:1px solid var(--border);font-size:13px;}
+.linklist li:first-child{border-top:none;}
+.linklist b{color:var(--navy-2);}
+.footer{padding:24px 24px 4px;font-size:11.5px;color:var(--grey);text-align:center;}
+.small{font-size:12px;color:var(--grey);margin-top:8px;}
+@media(max-width:480px){
+  .hero h1{font-size:23px;}
+  .highlight{margin:-10px 14px 18px;padding:16px 16px;}
+  .section{padding:18px 14px 0;}
+  table{font-size:12px;}
+  th,td{padding:7px 6px;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-top">
+      <p class="hero-eyebrow">Průvodce pro cestu · 2 dny ve městě</p>
+      <a class="back-btn" href="../index.html">← Zpět</a>
+    </div>
+    <h1>🚊 MHD v Poznani</h1>
+    <p>Ceny jízdenek ZTM Poznań, kde je koupit a jak se v systému zorientovat — ceny odpovídají tarifu platnému od září 2025.</p>
+  </div>
+  
+<div class="highlight">
+  <p class="tag">Doporučení na 2denní pobyt</p>
+  <p class="big">48hodinová jízdenka v Poznani neexistuje</p>
+  <p>ZTM Poznań nabízí jen 24hodinové jízdenky (a pak rovnou 7denní, kterou pro 2 dny nepotřebuješ). Pro dva dny se nejvíc vyplatí koupit <span class="price">2× 24hodinovou jízdenku na zónu A (2× 18 zł = 36 zł)</span>. Výjimka: pokud tvé dva dny padnou na pátek večer + sobotu + neděli, stačí jedna 24h jízdenka zakasovaná v pátek po 20:00 — platí až do neděle půlnoci (viz tip níže).</p>
+</div>
+
+  <div class="section">
+    
+<div class="card">
+  <h2>💳 Ceník jízdenek ZTM Poznań <span class="dim" style="font-size:11px;font-weight:600;">(tarif od září 2025)</span></h2>
+  <table>
+    <tr><th>Typ jízdenky</th><th>Plnocenná</th><th>Zlevněná</th></tr>
+    <tr><td>Časová 15 min <span class="dim">(zóna A+B+C+D)</span></td><td class="price">5,00 zł</td><td>2,50 zł</td></tr>
+    <tr><td>Časová 45 min <span class="dim">(zóna A+B+C+D)</span></td><td class="price">7,00 zł</td><td>3,50 zł</td></tr>
+    <tr><td>Časová 90 min <span class="dim">(zóna A+B+C+D)</span></td><td class="price">9,00 zł</td><td>4,50 zł</td></tr>
+    <tr><td>24hodinová — zóna A <span class="badge">doporučeno</span></td><td class="price">18,00 zł</td><td>9,00 zł</td></tr>
+    <tr><td>24hodinová — zóna A+B+C+D</td><td class="price">24,00 zł</td><td>12,00 zł</td></tr>
+  </table>
+  <p class="small">Zóna A pokrývá celé město Poznaň — pro běžnou návštěvu úplně stačí, zóny B+C+D jsou příměstské oblasti. Časové jízdenky umožňují přestupy po dobu platnosti.</p>
+</div>
+
+<div class="card">
+  <h2>🛒 Kde a jak koupit</h2>
+  <ul class="tick">
+    <li>Automaty na zastávkách a v pojízdném terminálu ve vozidle.</li>
+    <li>Přímo ve vozidle — bezkontaktní platba kartou/mobilem u terminálu, funguje jako běžná jízdenka.</li>
+    <li>Mobilní aplikace: <b>moBILET</b>, <b>SkyCash</b>, <b>GoPay</b>, <b>jakdojade.pl</b> nebo <b>zBiletem</b> — po nákupu je nutná aktivace naskenováním QR kódu ve vozidle nebo zadáním jeho čísla.</li>
+    <li>Místní karta <b>PEKA</b> (Poznańska Elektroniczna Karta Aglomeracyjna) — vyplatí se spíš dlouhodobým pobytům, na dva dny ji nemá smysl řešit.</li>
+  </ul>
+  <div class="tipbox">
+    <p class="t">Víkendový trik — Weekend 24h</p>
+    <p>Pokud zakasuješ 24hodinovou jízdenku v pátek po 20:00, platí až do neděle 24:00 — tedy klidně celý víkend za cenu jedné 24h jízdenky. Skvělé, pokud tvoje dva dny v Poznani vyjdou na pátek večer až neděli.</p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>🌐 Užitečné weby a appky</h2>
+  <ul class="linklist">
+    <li><b>www.ztm.poznan.pl</b> — oficiální ceník, jízdní řády a kalkulačka jízdného (polsky)</li>
+    <li><b>www.mpk.poznan.pl/en</b> — část webu i v angličtině</li>
+    <li><b>www.jakdojade.pl</b> — plánovač spojení pro Poznaň (polsky/anglicky/rusky/ukrajinsky, čeština bohužel chybí)</li>
+    <li><b>Google Mapy</b> — trasu MHD spočítají i v češtině, dobrá záloha když jakdojade nesedí</li>
+    <li><b>moBILET</b> nebo <b>SkyCash</b> (App Store / Google Play) — nákup jízdenek z telefonu</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2>📌 Tipy na závěr</h2>
+  <ul class="tick">
+    <li>Jízdenku z appky si nech otevřenou v telefonu nebo vyfoť aktivační obrazovku — při namátkové kontrole (kontroler) ji budeš potřebovat ukázat.</li>
+    <li>Kontrola bez platné/aktivované jízdenky = pokuta na místě. Revizoři nemluví česky ani moc anglicky, takže jízdenku aktivuj hned při nástupu.</li>
+    <li>Papírovou jízdenku z automatu je potřeba orazítkovat (skasovat) v kasovníku hned po nástupu do vozu.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2>🎓 Zlevněná (ulgowy) jízdenka — kdo má nárok</h2>
+  <p class="small" style="margin-bottom:10px;">V polské MHD existují dvě ceny: <b>normalna</b> (plná) a <b>ulgowa</b> (zlevněná, obvykle o 50 %). Kdo přesně má na ni nárok a jaký doklad musí u kontroly ukázat, určuje vyhláška daného města — a v Poznani je bohužel přísnější než ve Wrocławi.</p>
+  <div class="tipbox" style="background:var(--red-light);border-color:var(--red);">
+    <p class="t" style="color:var(--red);">❌ Studenti z ČR — v Poznani nárok NEMÁTE</p>
+    <p style="color:#5a1420;">Podle aktuálně platné vyhlášky ZTM Poznań (příloha č. 4 k nařízení primátora č. 445/2025/P) je jediným uznávaným dokladem pro 50% studentskou slevu <b>legitimace vydaná polskou vysokou školou</b> podle vzoru polského Ministerstva školství. Mezinárodní ISIC, Euro26 ani žádná zahraniční studentská legitimace zde neplatí — ZTM tuto možnost dřív uznával, ale zrušil ji. Turisté i zahraniční studenti proto v Poznani platí za jízdenku plnou (normalną) cenu, i s ISIC kartou v ruce.</p>
+  </div>
+  <p class="small" style="margin-top:10px;">Nárok na slevu v Poznani mají prakticky jen: děti/mládež do 18 let (žáci se školní legitimací do 23 let, pokud škola sídlí v Poznani), senioři 65+ (bilet Senior) resp. 70+ (zdarma), osoby se zdravotním postižením a další úzce vymezené skupiny — běžného zahraničního studenta na krátké návštěvě se to netýká.</p>
+</div>
+
+  </div>
+  <div class="footer">MHD průvodce Poznań · ceny a podmínky slev doporučujeme ověřit na www.ztm.poznan.pl, protože se občas mění</div>
+</div>
+</body>
+</html>

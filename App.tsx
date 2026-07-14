@@ -1,11 +1,12 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { tripData } from './data';
-import { UsefulLink } from './components/types';
+import { UsefulLink, DocumentLink } from './components/types';
 import ItinerarySection from './components/ItinerarySection';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import LoginOverlay from './components/LoginOverlay';
 import UsefulLinks from './components/UsefulLinks';
+import DocumentsSection from './components/DocumentsSection';
 import { DaySelector } from './components/DaySelector';
 
 const App: React.FC = () => {
@@ -44,6 +45,16 @@ const App: React.FC = () => {
       return tripData.usefulLinks;
     }
   });
+
+  const [documents, setDocuments] = useState<DocumentLink[]>(() => {
+    try {
+      const item = window.localStorage.getItem('documents');
+      return item ? JSON.parse(item) : tripData.documents;
+    } catch (error) {
+      console.error("Could not parse documents from localStorage", error);
+      return tripData.documents || [];
+    }
+  });
   
   useEffect(() => {
     const storedVersion = window.localStorage.getItem('tripVersion');
@@ -63,10 +74,12 @@ const App: React.FC = () => {
         console.log(`New trip detected ('${newTripId}' vs '${oldTripId}'). Clearing all user data.`);
         window.localStorage.removeItem('visitedPlaces');
         window.localStorage.removeItem('usefulLinks');
+        window.localStorage.removeItem('documents');
         window.localStorage.removeItem('collapsedDays');
         setVisitedPlaces(new Set());
         setCollapsedDays(new Set());
         setUsefulLinks(tripData.usefulLinks);
+        setDocuments(tripData.documents || []);
       } else {
         console.log("Same trip, minor version update. Merging useful links and preserving user data.");
         
@@ -99,6 +112,37 @@ const App: React.FC = () => {
             setUsefulLinks(newDefaultLinks);
             window.localStorage.setItem('usefulLinks', JSON.stringify(newDefaultLinks));
         }
+
+        // Merge documents
+        const storedDocsJSON = window.localStorage.getItem('documents');
+        const newDefaultDocs = tripData.documents || [];
+
+        if (storedDocsJSON) {
+            try {
+                const storedDocs: DocumentLink[] = JSON.parse(storedDocsJSON);
+                const docsMap = new Map<string, DocumentLink>();
+                
+                storedDocs.forEach(doc => docsMap.set(doc.url, doc));
+                newDefaultDocs.forEach(doc => {
+                    if (!docsMap.has(doc.url)) {
+                        docsMap.set(doc.url, doc);
+                    }
+                });
+                
+                const mergedDocs = Array.from(docsMap.values());
+                
+                setDocuments(mergedDocs);
+                window.localStorage.setItem('documents', JSON.stringify(mergedDocs));
+
+            } catch(e) {
+                 console.error("Failed to parse or merge documents, resetting to default.", e);
+                 setDocuments(newDefaultDocs);
+                 window.localStorage.setItem('documents', JSON.stringify(newDefaultDocs));
+            }
+        } else {
+            setDocuments(newDefaultDocs);
+            window.localStorage.setItem('documents', JSON.stringify(newDefaultDocs));
+        }
       }
       
       window.localStorage.setItem('tripVersion', APP_VERSION_IDENTIFIER);
@@ -129,6 +173,14 @@ const App: React.FC = () => {
       console.error("Could not save useful links to localStorage", error);
     }
   }, [usefulLinks]);
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem('documents', JSON.stringify(documents));
+    } catch (error) {
+      console.error("Could not save documents to localStorage", error);
+    }
+  }, [documents]);
 
   useEffect(() => {
     try {
@@ -190,9 +242,10 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200">
-      <Header title={tripData.title} dates={tripData.dates} versionIdentifier={APP_VERSION_IDENTIFIER} />
+      <Header title={tripData.title} dates={tripData.dates} versionIdentifier={APP_VERSION_IDENTIFIER} googleMyMapsLink={tripData.googleMyMapsLink} />
       <main className="container mx-auto px-4 py-8">
         <UsefulLinks links={usefulLinks} onLinksChange={setUsefulLinks} />
+        <DocumentsSection documents={documents} onDocumentsChange={setDocuments} />
         <DaySelector 
           itinerary={tripData.itinerary} 
           collapsedDays={collapsedDays}

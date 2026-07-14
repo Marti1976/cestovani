@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MHD Wrocław — jízdenky a doprava</title>
+<style>
+:root{
+  --bg:#faf8f4; --card:#ffffff; --navy:#16233f; --navy-2:#24365c;
+  --red:#c8102e; --red-light:#fdecef; --grey:#6b6f76; --grey-light:#eeece5;
+  --border:#e6e3db; --green:#1f7a4d; --green-light:#eaf5ef;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--bg); color:var(--navy);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.5;
+}
+.wrap{max-width:760px;margin:0 auto;padding:0 0 40px;}
+.hero{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 100%);
+  color:#fff; padding:36px 24px 28px; position:relative;
+}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:var(--red);}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin:0 0 8px;}
+.hero-eyebrow{font-size:12.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9fb0d6;margin:0;}
+.back-btn{
+  display:inline-flex;align-items:center;gap:6px;flex-shrink:0;
+  background:rgba(255,255,255,0.12);color:#fff;text-decoration:none;
+  font-size:12.5px;font-weight:700;padding:7px 14px;border-radius:20px;
+  border:1px solid rgba(255,255,255,0.28);white-space:nowrap;
+}
+.back-btn:hover{background:rgba(255,255,255,0.22);}
+.hero h1{font-size:28px;font-weight:800;margin:0 0 8px;letter-spacing:-0.01em;}
+.hero p{font-size:14px;color:#c7cee0;margin:0;max-width:52ch;}
+.section{padding:22px 24px 0;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:16px;}
+.card h2{font-size:16px;margin:0 0 12px;color:var(--navy);}
+.card h3{font-size:13.5px;margin:16px 0 8px;color:var(--navy);}
+.card h3:first-of-type{margin-top:0;}
+.highlight{
+  background:var(--red);color:#fff;border-radius:14px;padding:20px 22px;margin:-14px 24px 20px;
+  position:relative; z-index:2; box-shadow:0 8px 24px rgba(200,16,46,0.25);
+}
+.highlight .tag{font-size:11px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:#ffd7dd;margin:0 0 6px;}
+.highlight .big{font-size:22px;font-weight:800;margin:0 0 6px;}
+.highlight p{margin:0;font-size:13.5px;color:#ffe3e7;line-height:1.55;}
+.highlight .price{font-weight:800;color:#fff;}
+table{width:100%;border-collapse:collapse;font-size:13.5px;}
+th{
+  background:var(--navy);color:#fff;text-align:left;font-size:11.5px;
+  text-transform:uppercase;letter-spacing:0.03em;padding:8px 10px;
+}
+td{padding:8px 10px;border-top:1px solid var(--border);}
+tr:nth-child(even) td{background:#fbfaf7;}
+td.price{font-weight:700;color:var(--navy-2);white-space:nowrap;}
+td.dim{color:var(--grey);}
+.badge{
+  display:inline-block;background:var(--red-light);color:var(--red);font-size:10.5px;font-weight:800;
+  padding:2px 8px;border-radius:20px;margin-left:6px;vertical-align:middle;
+}
+ul.tick{list-style:none;margin:0;padding:0;}
+ul.tick li{position:relative;padding:6px 0 6px 22px;font-size:13.5px;}
+ul.tick li::before{content:"•";position:absolute;left:4px;color:var(--red);font-weight:900;}
+.tipbox{background:var(--green-light);border:1px solid var(--green);border-radius:12px;padding:14px 16px;margin-top:10px;}
+.tipbox .t{font-weight:800;color:var(--green);font-size:13px;margin:0 0 6px;}
+.tipbox p, .tipbox li{font-size:13px;color:#204d36;}
+.linklist{margin:0;padding:0;list-style:none;}
+.linklist li{padding:6px 0;border-top:1px solid var(--border);font-size:13px;}
+.linklist li:first-child{border-top:none;}
+.linklist b{color:var(--navy-2);}
+.footer{padding:24px 24px 4px;font-size:11.5px;color:var(--grey);text-align:center;}
+.small{font-size:12px;color:var(--grey);margin-top:8px;}
+@media(max-width:480px){
+  .hero h1{font-size:23px;}
+  .highlight{margin:-10px 14px 18px;padding:16px 16px;}
+  .section{padding:18px 14px 0;}
+  table{font-size:12px;}
+  th,td{padding:7px 6px;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-top">
+      <p class="hero-eyebrow">Průvodce pro cestu · 2 dny ve městě</p>
+      <a class="back-btn" href="../index.html">← Zpět</a>
+    </div>
+    <h1>🚋 MHD ve Wrocławi</h1>
+    <p>Ceny jízdenek MPK Wrocław, kde je koupit a jak se v systému zorientovat — ceny odpovídají tarifu platnému v roce 2026.</p>
+  </div>
+  
+<div class="highlight">
+  <p class="tag">Doporučení na 2denní pobyt</p>
+  <p class="big">48hodinová jízdenka — <span class="price">26 zł</span> <span style="font-weight:400;font-size:14px;">(13 zł zlevněná)</span></p>
+  <p>Koupíš jednou, platí přesně 48 hodin od zakasování — ideální na dva dny ve Wrocławi bez řešení, kdy jízdenka vyprší. Nekupuj zbytečně 2× 24hodinovou (2× 15 zł = 30 zł vyjde dráž).</p>
+</div>
+
+  <div class="section">
+    
+<div class="card">
+  <h2>💳 Ceník jízdenek MPK Wrocław</h2>
+  <table>
+    <tr><th>Typ jízdenky</th><th>Plnocenná</th><th>Zlevněná</th></tr>
+    <tr><td>Jednorázová <span class="dim">(bez přestupu)</span></td><td class="price">4,60 zł</td><td>2,30 zł</td></tr>
+    <tr><td>Časová 15 minut</td><td class="price">3,20 zł</td><td>1,60 zł</td></tr>
+    <tr><td>Časová 30 minut</td><td class="price">4,00 zł</td><td>2,00 zł</td></tr>
+    <tr><td>Časová 60 minut</td><td class="price">5,20 zł</td><td>2,60 zł</td></tr>
+    <tr><td>Časová 90 minut</td><td class="price">7,00 zł</td><td>3,50 zł</td></tr>
+    <tr><td>24hodinová</td><td class="price">15,00 zł</td><td>7,50 zł</td></tr>
+    <tr><td>48hodinová <span class="badge">na 2 dny</span></td><td class="price">26,00 zł</td><td>13,00 zł</td></tr>
+  </table>
+  <p class="small">Časové jízdenky umožňují přestupovat po dobu platnosti. Jednorázová platí jen na jeden spoj bez přestupu. Senioři nad 65 let jezdí zdarma (na požádání se prokazují dokladem totožnosti).</p>
+</div>
+
+<div class="card">
+  <h2>🛒 Kde a jak koupit</h2>
+  <ul class="tick">
+    <li>Automaty na zastávkách — přijímají platební karty i mince.</li>
+    <li>Přímo ve vozidle — přilož bezkontaktní kartu nebo mobil k validátoru u dveří, systém strhne cenu jízdenky automaticky.</li>
+    <li>Mobilní aplikace <b>mPay</b> — oficiální partner MPK Wrocław, nabízí všechny typy včetně 48h jízdenky.</li>
+    <li>Aplikace <b>SkyCash</b> — funguje ve Wrocławi i v desítkách dalších polských měst.</li>
+  </ul>
+  <div class="tipbox">
+    <p class="t">Nejrychlejší varianta bez appky</p>
+    <p>Nastup do tramvaje/autobusu a přilož bezkontaktní kartu nebo telefon k validátoru — nemusíš řešit typ jízdenky předem ani stahovat žádnou appku. Pozor: takhle koupíš jen jednorázovou/časovou jízdenku, ne 48h variantu — tu je potřeba přes automat nebo appku mPay.</p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>🌐 Užitečné weby a appky</h2>
+  <ul class="linklist">
+    <li><b>www.wroclaw.pl/mpk-wroclaw-bilety</b> — oficiální ceník a typy jízdenek (polsky)</li>
+    <li><b>mpk.wroc.pl</b> — jízdní řády, linky, aktuální výluky (polsky, částečně anglicky)</li>
+    <li><b>www.jakdojade.pl</b> — plánovač spojení pro Wrocław (polsky/anglicky/rusky/ukrajinsky, čeština bohužel chybí)</li>
+    <li><b>Google Mapy</b> — trasu MHD spočítají i v češtině, dobrá záloha když jakdojade nesedí</li>
+    <li><b>mPay</b> (App Store / Google Play) — nákup jízdenek včetně 48h</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2>📌 Tipy na závěr</h2>
+  <ul class="tick">
+    <li>Jízdenku/aktivaci appky si vyfoť nebo nech otevřenou v telefonu — při namátkové kontrole (kontroler) ji ukážeš.</li>
+    <li>Kontrola bez platné jízdenky = pokuta na místě. Revizoři nemluví česky ani moc anglicky, takže jízdenku aktivuj hned při nástupu.</li>
+    <li>48hodinová jízdenka běží přesně 48 hodin od okamžiku zakasování, ne do půlnoci — naplánuj si podle toho, kdy ji „spustit".</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2>🎓 Zlevněná (ulgowy) jízdenka — kdo má nárok</h2>
+  <p class="small" style="margin-bottom:10px;">V polské MHD existují dvě ceny: <b>normalna</b> (plná) a <b>ulgowa</b> (zlevněná, obvykle o 50 %). Kdo přesně má na ni nárok a jaký doklad musí u kontroly ukázat, určuje vyhláška daného města — proto se pravidla mezi Wrocławí a Poznaní liší. Obecně mají nárok děti a mládež do určitého věku, žáci a studenti, senioři (ve Wrocławi 65+ jezdí dokonce zdarma) a osoby se zdravotním postižením.</p>
+  <div class="tipbox">
+    <p class="t">✅ Studenti z ČR — ve Wrocławi nárok MÁTE</p>
+    <p>MPK Wrocław uznává jako doklad opravňující ke slevě i:</p>
+    <ul style="margin:6px 0 8px 18px;padding:0;font-size:13px;color:#204d36;">
+      <li>mezinárodní studentský průkaz <b>ISIC</b></li>
+      <li>kartu <b>Euro26 Student</b></li>
+      <li>zahraniční (např. českou) studentskou legitimaci — ale jen s úředně ověřeným překladem soudním tlumočníkem</li>
+    </ul>
+    <p><b>Nejjednodušší cesta:</b> pořiďte si před cestou ISIC kartu (spousta českých studentů ji má už z domova) — s ní platíte rovnou zlevněné jízdné (2,30 zł místo 4,60 zł, 13 zł místo 26 zł za 48h) bez řešení překladů.</p>
+  </div>
+  <p class="small" style="margin-top:10px;">Při namátkové kontrole je potřeba ukázat originál karty (ne foto ani sken) — pokud na ní není datum narození, i doklad totožnosti. Bez dokladu = kontrolor slevu neuzná a hrozí pokuta.</p>
+</div>
+
+  </div>
+  <div class="footer">MHD průvodce Wrocław · ceny a podmínky slev doporučujeme ověřit na www.wroclaw.pl/mpk-wroclaw-bilety, protože se občas mění</div>
+</div>
+</body>
+</html>

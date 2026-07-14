@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { UsefulLink } from './types';
-import { IconLink, IconPencil, IconTrash, IconSave, IconCancel, IconPlus } from './Icons';
+import { IconLink, IconPencil, IconTrash, IconSave, IconCancel, IconPlus, IconMinus } from './Icons';
 
 interface UsefulLinksProps {
     links: UsefulLink[];
@@ -11,6 +11,21 @@ const UsefulLinks: React.FC<UsefulLinksProps> = ({ links, onLinksChange }) => {
     const [isAdding, setIsAdding] = useState(false);
     const [editingId, setEditingId] = useState<number | null>(null);
     const [currentLink, setCurrentLink] = useState<{ title: string; url: string }>({ title: '', url: '' });
+    const [isCollapsed, setIsCollapsed] = useState(() => {
+        try {
+            return window.localStorage.getItem('usefulLinksCollapsed') === 'true';
+        } catch {
+            return false;
+        }
+    });
+
+    useEffect(() => {
+        try {
+            window.localStorage.setItem('usefulLinksCollapsed', isCollapsed.toString());
+        } catch {
+            // ignore
+        }
+    }, [isCollapsed]);
 
     const handleEdit = (link: UsefulLink) => {
         setEditingId(link.id);
@@ -79,36 +94,50 @@ const UsefulLinks: React.FC<UsefulLinksProps> = ({ links, onLinksChange }) => {
     
     return (
         <div className="bg-blue-50 dark:bg-slate-800/50 border border-blue-200 dark:border-slate-700 rounded-xl p-5 mb-8 shadow-md">
-            <h3 className="text-xl font-bold text-blue-800 dark:text-blue-400 mb-4">Užitečné odkazy</h3>
-            <ul className="space-y-1">
-                {links.map(link => (
-                    <li key={link.id}>
-                        {editingId === link.id ? (
-                            renderEditForm()
-                        ) : (
-                            <div className="flex justify-between items-center group p-2 rounded-md hover:bg-blue-100/50 dark:hover:bg-slate-700/50 transition-colors">
-                                <a href={link.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-blue-600 dark:text-blue-400 hover:underline break-all">
-                                    <IconLink />
-                                    <span>{link.title}</span>
-                                </a>
-                                <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 ml-4">
-                                    <button onClick={() => handleEdit(link)} className="p-2 text-slate-500 hover:text-blue-500 rounded-full" aria-label="Upravit odkaz"><IconPencil /></button>
-                                    <button onClick={() => handleDelete(link.id)} className="p-2 text-slate-500 hover:text-red-500 rounded-full" aria-label="Smazat odkaz"><IconTrash /></button>
-                                </div>
-                            </div>
-                        )}
-                    </li>
-                ))}
-            </ul>
-             {isAdding && renderEditForm()}
-            <div className="mt-4 pt-4 border-t border-blue-200 dark:border-slate-700">
-                {!isAdding && !editingId && (
-                     <button onClick={handleAddNew} className="flex items-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline">
-                        <IconPlus />
-                        Přidat nový odkaz
-                    </button>
-                )}
+            <div className="flex justify-between items-center mb-4">
+                <h3 className="text-xl font-bold text-blue-800 dark:text-blue-400 m-0">Užitečné odkazy</h3>
+                <button
+                    onClick={() => setIsCollapsed(!isCollapsed)}
+                    className="p-1.5 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-slate-700 rounded-md transition-colors flex items-center justify-center cursor-pointer"
+                    aria-label={isCollapsed ? "Rozbalit užitečné odkazy" : "Skrýt užitečné odkazy"}
+                >
+                    {isCollapsed ? <IconPlus /> : <IconMinus />}
+                </button>
             </div>
+            
+            {!isCollapsed && (
+                <>
+                    <ul className="space-y-1">
+                        {links.map(link => (
+                            <li key={link.id}>
+                                {editingId === link.id ? (
+                                    renderEditForm()
+                                ) : (
+                                    <div className="flex justify-between items-center group p-2 rounded-md hover:bg-blue-100/50 dark:hover:bg-slate-700/50 transition-colors">
+                                        <a href={link.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-blue-600 dark:text-blue-400 hover:underline break-all">
+                                            <IconLink />
+                                            <span>{link.title}</span>
+                                        </a>
+                                        <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 ml-4">
+                                            <button onClick={() => handleEdit(link)} className="p-2 text-slate-500 hover:text-blue-500 rounded-full" aria-label="Upravit odkaz"><IconPencil /></button>
+                                            <button onClick={() => handleDelete(link.id)} className="p-2 text-slate-500 hover:text-red-500 rounded-full" aria-label="Smazat odkaz"><IconTrash /></button>
+                                        </div>
+                                    </div>
+                                )}
+                            </li>
+                        ))}
+                    </ul>
+                    {isAdding && renderEditForm()}
+                    <div className="mt-4 pt-4 border-t border-blue-200 dark:border-slate-700">
+                        {!isAdding && !editingId && (
+                            <button onClick={handleAddNew} className="flex items-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline cursor-pointer">
+                                <IconPlus />
+                                Přidat nový odkaz
+                            </button>
+                        )}
+                    </div>
+                </>
+            )}
         </div>
     );
 };
