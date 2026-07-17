@@ -60,6 +60,14 @@
     margin-left:auto; border:1px solid var(--border); background:#fff; color:var(--red);
     padding:8px 14px; border-radius:8px; font-size:12.5px; font-weight:700; cursor:pointer; min-height:36px;
   }
+  .playallbtn{
+    border:none; background:var(--navy); color:#fff;
+    padding:8px 14px; border-radius:8px; font-size:12.5px; font-weight:700; cursor:pointer; min-height:36px;
+    display:inline-flex; align-items:center; gap:6px;
+  }
+  .playallbtn:disabled{ opacity:0.55; cursor:not-allowed; }
+  .playallbtn.playing{ background:var(--red); }
+  .tab:disabled, .search:disabled, .speed button:disabled, .check input:disabled{ opacity:0.55; cursor:not-allowed; }
   .note{ font-size:11.5px; color:var(--grey); background:var(--grey-light); border-radius:9px; padding:9px 11px; margin-bottom:14px; line-height:1.5; }
 
   .cat{ margin-bottom:9px; border:1px solid var(--border); border-radius:12px; overflow:hidden; background:var(--card); }
@@ -126,6 +134,7 @@
     rate: 1,
     openCats: new Set(),
     playingBtn: null,
+    playingAllBlock: false,
   };
 
   let voices = [];
@@ -138,9 +147,62 @@
     return voices.find(v => v.lang && v.lang.toLowerCase().startsWith(langPrefix)) || null;
   }
 
+  function lockControls(locked){
+    const root = document.getElementById('app-root');
+    root.querySelectorAll('.tab, .search, #cz-toggle, .speed button').forEach(el => { el.disabled = locked; });
+  }
+
+  function setPlayAllBtnState(playing){
+    const btn = document.getElementById('play-all-block');
+    if (!btn) return;
+    if (playing) { btn.classList.add('playing'); btn.textContent = '⏸ Přehrává se…'; btn.disabled = true; }
+    else { btn.classList.remove('playing'); btn.textContent = '▶ Přehrát celý blok'; btn.disabled = false; }
+  }
+
   function stopAll(){
     if (window.speechSynthesis) window.speechSynthesis.cancel();
     if (state.playingBtn) { state.playingBtn.classList.remove('playing'); state.playingBtn = null; }
+    state.playingAllBlock = false;
+    setPlayAllBtnState(false);
+    lockControls(false);
+  }
+
+  function speakAllBlock(){
+    if (!window.speechSynthesis) {
+      alert('Tento prohlížeč bohužel nepodporuje hlasový výstup (Web Speech API).');
+      return;
+    }
+    if (state.playingAllBlock) return;
+    stopAll();
+    const cats = DATA[state.tab];
+    const utterances = [];
+    cats.forEach(cat => {
+      cat.words.forEach(w => {
+        if (state.speakCz) {
+          const uCz = new SpeechSynthesisUtterance(w.cz.replace(/\(.*?\)/g, ''));
+          uCz.lang = 'cs-CZ';
+          const vCz = pickVoice('cs');
+          if (vCz) uCz.voice = vCz;
+          utterances.push(uCz);
+        }
+        const uPl = new SpeechSynthesisUtterance(w.pl);
+        uPl.lang = 'pl-PL';
+        const vPl = pickVoice('pl');
+        if (vPl) uPl.voice = vPl;
+        uPl.rate = state.rate;
+        utterances.push(uPl);
+      });
+    });
+    if (!utterances.length) return;
+    state.playingAllBlock = true;
+    setPlayAllBtnState(true);
+    lockControls(true);
+    utterances[utterances.length - 1].onend = () => {
+      state.playingAllBlock = false;
+      setPlayAllBtnState(false);
+      lockControls(false);
+    };
+    utterances.forEach(u => window.speechSynthesis.speak(u));
   }
 
   function speakWord(cz, pl, btn){
@@ -221,6 +283,7 @@
         <input class="search" type="text" placeholder="Hledat slovíčko…" value="${state.query}" />
       </div>
       <div class="toggle-row">
+        <button class="playallbtn" id="play-all-block">▶ Přehrát celý blok</button>
         <label class="check"><input type="checkbox" id="cz-toggle" ${state.speakCz?'checked':''}/> Přehrát i českou verzi</label>
         <div class="speed">
           <button data-rate="0.7" class="${state.rate===0.7?'active':''}">Pomalu</button>
@@ -299,6 +362,7 @@
       btn.addEventListener('click', () => { state.rate = parseFloat(btn.dataset.rate); render(); });
     });
     root.querySelector('#stop-btn').addEventListener('click', stopAll);
+    root.querySelector('#play-all-block').addEventListener('click', speakAllBlock);
   }
 
   render();
