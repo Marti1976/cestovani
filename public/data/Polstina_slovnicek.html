@@ -131,7 +131,7 @@
     tab: 'essential',
     query: '',
     speakCz: true,
-    rate: 1,
+    gapMs: 350,
     openCats: new Set(),
     playingBtn: null,
     playingAllBlock: false,
@@ -159,12 +159,33 @@
     else { btn.classList.remove('playing'); btn.textContent = '▶ Přehrát celý blok'; btn.disabled = false; }
   }
 
+  let playToken = 0;
+
   function stopAll(){
+    playToken++; // invaliduje jakoukoliv rozehranou frontu/pauzu
     if (window.speechSynthesis) window.speechSynthesis.cancel();
     if (state.playingBtn) { state.playingBtn.classList.remove('playing'); state.playingBtn = null; }
     state.playingAllBlock = false;
     setPlayAllBtnState(false);
     lockControls(false);
+  }
+
+  // Přehraje utterances jedna po druhé s pauzou gapMs mezi nimi (místo pouhého
+  // zafrontování všech najednou). Token zajistí, že staré přehrávání "neožije"
+  // po stisknutí Zastavit.
+  function speakSequence(utterances, gapMs, onDone){
+    const myToken = playToken;
+    let i = 0;
+    function next(){
+      if (myToken !== playToken) return;
+      if (i >= utterances.length) { if (onDone) onDone(); return; }
+      const u = utterances[i++];
+      const advance = () => { if (myToken === playToken) setTimeout(() => { if (myToken === playToken) next(); }, gapMs); };
+      u.onend = advance;
+      u.onerror = advance;
+      window.speechSynthesis.speak(u);
+    }
+    next();
   }
 
   function speakAllBlock(){
@@ -189,7 +210,6 @@
         uPl.lang = 'pl-PL';
         const vPl = pickVoice('pl');
         if (vPl) uPl.voice = vPl;
-        uPl.rate = state.rate;
         utterances.push(uPl);
       });
     });
@@ -197,12 +217,11 @@
     state.playingAllBlock = true;
     setPlayAllBtnState(true);
     lockControls(true);
-    utterances[utterances.length - 1].onend = () => {
+    speakSequence(utterances, state.gapMs, () => {
       state.playingAllBlock = false;
       setPlayAllBtnState(false);
       lockControls(false);
-    };
-    utterances.forEach(u => window.speechSynthesis.speak(u));
+    });
   }
 
   function speakWord(cz, pl, btn){
@@ -218,39 +237,37 @@
       uCz.lang = 'cs-CZ';
       const vCz = pickVoice('cs');
       if (vCz) uCz.voice = vCz;
-      uCz.rate = 1;
       utterances.push(uCz);
     }
     const uPl = new SpeechSynthesisUtterance(pl);
     uPl.lang = 'pl-PL';
     const vPl = pickVoice('pl');
     if (vPl) uPl.voice = vPl;
-    uPl.rate = state.rate;
     utterances.push(uPl);
-    utterances[utterances.length - 1].onend = () => {
+    speakSequence(utterances, state.gapMs, () => {
       if (btn) btn.classList.remove('playing');
       if (state.playingBtn === btn) state.playingBtn = null;
-    };
-    utterances.forEach(u => window.speechSynthesis.speak(u));
+    });
   }
 
   function speakCategory(words){
     stopAll();
+    const utterances = [];
     words.forEach(w => {
       if (state.speakCz) {
         const uCz = new SpeechSynthesisUtterance(w.cz.replace(/\(.*?\)/g, ''));
         uCz.lang = 'cs-CZ';
         const vCz = pickVoice('cs');
         if (vCz) uCz.voice = vCz;
-        window.speechSynthesis.speak(uCz);
+        utterances.push(uCz);
       }
       const uPl = new SpeechSynthesisUtterance(w.pl);
       uPl.lang = 'pl-PL';
       const vPl = pickVoice('pl');
       if (vPl) uPl.voice = vPl;
-      uPl.rate = state.rate;
-      window.speechSynthesis.speak(uPl);
+      utterances.push(uPl);
     });
+    speakSequence(utterances, state.gapMs);
   }
 
   function matches(word, q){
@@ -286,8 +303,8 @@
         <button class="playallbtn" id="play-all-block">▶ Přehrát celý blok</button>
         <label class="check"><input type="checkbox" id="cz-toggle" ${state.speakCz?'checked':''}/> Přehrát i českou verzi</label>
         <div class="speed">
-          <button data-rate="0.7" class="${state.rate===0.7?'active':''}">Pomalu</button>
-          <button data-rate="1" class="${state.rate===1?'active':''}">Normálně</button>
+          <button data-gap="2500" class="${state.gapMs===2500?'active':''}" title="Delší pauza mezi slovy — čas na zopakování">Pomalu</button>
+          <button data-gap="350" class="${state.gapMs===350?'active':''}" title="Krátká pauza mezi slovy">Normálně</button>
         </div>
         <button class="stopbtn" id="stop-btn">⏹ Zastavit</button>
       </div>
@@ -359,7 +376,7 @@
     });
     root.querySelector('#cz-toggle').addEventListener('change', (e) => { state.speakCz = e.target.checked; });
     root.querySelectorAll('.speed button').forEach(btn => {
-      btn.addEventListener('click', () => { state.rate = parseFloat(btn.dataset.rate); render(); });
+      btn.addEventListener('click', () => { state.gapMs = parseInt(btn.dataset.gap, 10); render(); });
     });
     root.querySelector('#stop-btn').addEventListener('click', stopAll);
     root.querySelector('#play-all-block').addEventListener('click', speakAllBlock);
